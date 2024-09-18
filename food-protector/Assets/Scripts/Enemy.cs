@@ -8,30 +8,30 @@ public class Enemy : MonoBehaviour
     private Transform[] wayPoints;
     private int currentIndex = 0;
     private Movement2D movement2D;
+    private EnemySpawner enemySpawner;
 
     [SerializeField]
     private float rotationSpeed = 5f;
 
-    public void Setup(Transform[] wayPoints)
+    public void Setup(EnemySpawner enemySpawner, Transform[] wayPoints)
     {
         // Movement2D 컴포넌트
         movement2D = GetComponent<Movement2D>();
-        
-        // 총 wayPoint 개수
-        wayPointCount = wayPoints.Length; 
-        
-        // wayPoint 배열 설정
+
+        this.enemySpawner = enemySpawner;
+
+        wayPointCount = wayPoints.Length;
         this.wayPoints = new Transform[wayPointCount];
         this.wayPoints = wayPoints;
 
         // 첫 번째 wayPoint로 이동
         transform.position = wayPoints[currentIndex].position;
-        
+
         // 이동 코루틴 시작
         StartCoroutine("OnMove");
     }
 
-    public IEnumerator OnMove()
+    private IEnumerator OnMove()
     {
         // wayPoint로 이동 시작
         NextMoveTo();
@@ -47,13 +47,13 @@ public class Enemy : MonoBehaviour
 
             // 이동 방향 계산
             Vector2 direction = (wayPoints[currentIndex].position - transform.position).normalized;
-            
+
             // 이동 방향에 맞는 각도 계산
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
-            
+
             // 목표 회전값 계산
             Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
-            
+
             // 회전
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
@@ -66,18 +66,27 @@ public class Enemy : MonoBehaviour
         // 아직 도달해야 할 waypoint가 남아 있으면
         if (currentIndex < wayPointCount - 1)
         {
+
+            transform.position = wayPoints[currentIndex].position;
+            
             //다음 wayPoint 인덱스로 변경
             currentIndex++;
 
             Vector3 direction = (wayPoints[currentIndex].position - transform.position).normalized;
-            
+
             // movement2D 컴포넌트로 이동 명령
             movement2D.MoveTo(direction);
         }
         // 모든 wayPoint를 지났다면 오브젝트 삭제
         else
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            OnDie();
         }
+    }
+
+    public void OnDie()
+    {
+        enemySpawner.DestroyEnemy(this);
     }
 }
