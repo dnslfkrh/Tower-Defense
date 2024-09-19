@@ -11,6 +11,12 @@ public class EnemySpawner : MonoBehaviour
     private float spawnTime;
 
     [SerializeField]
+    private GameObject enemyHPSliderPrefab;
+
+    [SerializeField]
+    private Transform canvasTransform;
+
+    [SerializeField]
     private Transform[] wayPoints;
     private List<Enemy> enemyList;
 
@@ -33,6 +39,8 @@ public class EnemySpawner : MonoBehaviour
             enemy.Setup(this, wayPoints);
             enemyList.Add(enemy);
 
+            SpawnEnemyHPSlider(clone);
+
             yield return new WaitForSeconds(spawnTime);
         }
     }
@@ -42,5 +50,18 @@ public class EnemySpawner : MonoBehaviour
         enemyList.Remove(enemy);
 
         Destroy(enemy.gameObject);
+    }
+
+    private void SpawnEnemyHPSlider(GameObject enemy)
+    {
+        GameObject sliderClone = Instantiate(enemyHPSliderPrefab);
+
+        sliderClone.transform.SetParent(canvasTransform);
+
+        sliderClone.transform.localScale = Vector3.one;
+
+        sliderClone.GetComponent<SliderPositionAutoSetter>().Setup(enemy.transform);
+
+        sliderClone.GetComponent<EnemyHPViewer>().Setup(enemy.GetComponent<EnemyHP>());
     }
 }
