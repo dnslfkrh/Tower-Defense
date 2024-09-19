@@ -162,4 +162,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a235b358c05e37b45b83ef459fd8d821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 5
+  enemyType: Seagull

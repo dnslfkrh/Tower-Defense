@@ -5,18 +5,25 @@ using UnityEngine;
 public class EnemyHP : MonoBehaviour
 {
     [SerializeField]
-    private float maxHP;
+    private string enemyType;
+
     private float currentHP;
     private bool isDie = false;
     private Enemy enemy;
     private SpriteRenderer spriteRenderer;
 
-    public float MaxHP => maxHP;
+    private EnemyStatsManager enemyStatsManager;
+
+    public float maxHP { get; private set; }
     public float CurrentHP => currentHP;
 
-    private void Awake()
+    private void Start()
     {
+        enemyStatsManager = FindObjectOfType<EnemyStatsManager>();
+
+        maxHP = enemyStatsManager.GetMaxHP(enemyType);
         currentHP = maxHP;
+
         enemy = GetComponent<Enemy>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
