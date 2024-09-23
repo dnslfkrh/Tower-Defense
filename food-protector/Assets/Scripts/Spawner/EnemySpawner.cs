@@ -18,6 +18,10 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField]
     private Transform[] wayPoints;
+
+    [SerializeField]
+    private PlayerHP playerHP;
+
     private List<Enemy> enemyList;
 
     public List<Enemy> EnemyList => enemyList;
@@ -45,8 +49,14 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public void DestroyEnemy(Enemy enemy)
+    public void DestroyEnemy(EnemyDestroyType type, Enemy enemy)
     {
+        // 적이 목표 지점에 도착하면 음식 감소
+        if (type == EnemyDestroyType.Arrive)
+        {
+            playerHP.DecreaseFood(1);
+        }
+
         enemyList.Remove(enemy);
 
         Destroy(enemy.gameObject);
