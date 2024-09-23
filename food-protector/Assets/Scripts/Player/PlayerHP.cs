@@ -10,6 +10,7 @@ public class PlayerHP : MonoBehaviour
 
     [SerializeField]
     private float maxFood;
+
     private float currentFood;
 
     public float MaxFood => maxFood;

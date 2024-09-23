@@ -6,8 +6,11 @@ public class ObjectDetector : MonoBehaviour
 {
     [SerializeField]
     private TowerSpawner towerSpawner;
+
     private Camera mainCamera;
+    
     private Ray ray;
+    
     private RaycastHit hit;
 
     private void Awake()

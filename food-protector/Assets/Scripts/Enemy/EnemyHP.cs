@@ -8,8 +8,11 @@ public class EnemyHP : MonoBehaviour
     public string enemyType;
 
     private float currentHP;
+
     private bool isDie = false;
+    
     private Enemy enemy;
+    
     private SpriteRenderer spriteRenderer;
 
     private EnemyStatsManager enemyStatsManager;

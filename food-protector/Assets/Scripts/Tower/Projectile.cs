@@ -5,7 +5,9 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private Movement2D movement2D;
+    
     private Transform target;
+
     private int damage;
 
     public void Setup(Transform target, int damage)

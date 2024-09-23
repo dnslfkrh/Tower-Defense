@@ -22,7 +22,9 @@ public class TowerWeapon : MonoBehaviour
     private int attackDamage = 1; // 타워 데미지
 
     private WeaponState weaponState = WeaponState.SearchTarget;
+
     private Transform attackTarget = null;
+    
     private EnemySpawner enemySpawner;
 
     public void Setup(EnemySpawner enemySpawner)

@@ -5,8 +5,8 @@ using UnityEngine;
 public class EnemyStatsManager : MonoBehaviour
 {
     private Dictionary<string, float> enemyMaxHPs = new Dictionary<string, float>();
-    private Dictionary<string, float> enemyFoodDecreases = new Dictionary<string, float>();
 
+    private Dictionary<string, float> enemyFoodDecreases = new Dictionary<string, float>();
 
     private void Awake()
     {

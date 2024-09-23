@@ -11,7 +11,6 @@ public class TextTMPViewer : MonoBehaviour
     [SerializeField]
     private PlayerHP playerHP;
 
-
     private void Update()
     {
         // "남은 음식 / 시작 음식"
