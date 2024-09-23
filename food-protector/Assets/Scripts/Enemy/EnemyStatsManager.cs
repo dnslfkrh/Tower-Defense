@@ -4,17 +4,35 @@ using UnityEngine;
 
 public class EnemyStatsManager : MonoBehaviour
 {
+    private Dictionary<string, float> enemySpeeds = new Dictionary<string, float>();
+
     private Dictionary<string, float> enemyMaxHPs = new Dictionary<string, float>();
 
     private Dictionary<string, float> enemyFoodDecreases = new Dictionary<string, float>();
 
     private void Awake()
     {
+        // 적 유닛 별 "이동속도"
+        enemySpeeds.Add("Seagull", 10f);
+
         // 적 유닛 별 "체력"
         enemyMaxHPs.Add("Seagull", 5f);
 
         // 적 유닛 별 "감소 식량"
         enemyFoodDecreases.Add("Seagull", 5f);
+    }
+
+    public float GetSpeed(string enemyType)
+    {
+        if (enemySpeeds.TryGetValue(enemyType, out float maxSpeed))
+        {
+            return maxSpeed;
+        }
+        else
+        {
+            Debug.LogError("Enemy type not found: " + enemyType);
+            return 0f;
+        }
     }
 
     public float GetMaxHP(string enemyType)
