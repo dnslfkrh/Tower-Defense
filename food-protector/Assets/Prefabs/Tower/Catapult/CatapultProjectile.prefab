@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1101999350604206989}
   - component: {fileID: 2183450583921163868}
-  - component: {fileID: 1908890639372901128}
   - component: {fileID: 4951270582429003858}
   - component: {fileID: 8889613162663170996}
   - component: {fileID: 9078538812003468930}
+  - component: {fileID: 1388047801056225300}
   m_Layer: 0
   m_Name: CatapultProjectile
   m_TagString: Untagged
@@ -88,20 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1908890639372901128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 938914979186878781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4f5eed36a7d6264481528f743d3c3de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  moveDirectiron: {x: 0, y: 0, z: 0}
 --- !u!58 &4951270582429003858
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -176,3 +162,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8b6caa777a81941905b70a78200605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1388047801056225300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938914979186878781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a352ed0f6f393fc49be233e2e896ffb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 10
+  moveDirectiron: {x: 0, y: 0, z: 0}

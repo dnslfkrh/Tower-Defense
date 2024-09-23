@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 315950187703833953}
   - component: {fileID: 3303860357917867687}
-  - component: {fileID: 8311772475779415191}
   - component: {fileID: 5105689196132886843}
   - component: {fileID: 8844659785620645288}
   - component: {fileID: -5771119270623254066}
+  - component: {fileID: 7162941412435164961}
   m_Layer: 0
   m_Name: Seagull
   m_TagString: Enemy
@@ -88,20 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8311772475779415191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4710109676924590532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4f5eed36a7d6264481528f743d3c3de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 10
-  moveDirectiron: {x: 0, y: 0, z: 0}
 --- !u!114 &5105689196132886843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,3 +149,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: Seagull
+--- !u!114 &7162941412435164961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4710109676924590532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4f5eed36a7d6264481528f743d3c3de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0
+  moveDirectiron: {x: 0, y: 0, z: 0}

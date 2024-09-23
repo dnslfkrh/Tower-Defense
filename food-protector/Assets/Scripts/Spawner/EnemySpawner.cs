@@ -27,6 +27,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private EnemyStatsManager enemyStatsManager;
 
+    [SerializeField]
+    private PlayerGold playerGold;
+
     public List<Enemy> EnemyList => enemyList;
 
     private void Awake()
@@ -52,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public void DestroyEnemy(EnemyDestroyType type, Enemy enemy)
+    public void DestroyEnemy(EnemyDestroyType type, Enemy enemy, float dropGold)
     {
         // 적이 목표 지점에 도착하면 음식 감소
         if (type == EnemyDestroyType.Arrive)
@@ -62,6 +65,10 @@ public class EnemySpawner : MonoBehaviour
             float decreaseAmount = enemyStatsManager.GetDecreaseFoods(enemyHP.enemyType);
 
             playerHP.DecreaseFood(decreaseAmount);
+        }
+        else if (type ==EnemyDestroyType.kill)
+        {
+            playerGold.CurrentGold += dropGold;
         }
 
         enemyList.Remove(enemy);

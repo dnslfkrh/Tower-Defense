@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 
 public enum EnemyDestroyType { kill = 0, Arrive }
@@ -14,10 +15,26 @@ public class Enemy : MonoBehaviour
     private Transform[] wayPoints;
     
     private int currentIndex = 0;
-    
+
+    private string enemyType;
+
+    private float dropGold;
+
     private Movement2D movement2D;
     
     private EnemySpawner enemySpawner;
+
+    private EnemyStatsManager enemyStatsManager;
+
+    private void Start()
+    {
+        enemyStatsManager = FindObjectOfType<EnemyStatsManager>();
+
+        enemyType = GetComponent<EnemyHP>().enemyType;
+
+        dropGold = enemyStatsManager.GetDropGold(enemyType);
+
+    }
 
     public void Setup(EnemySpawner enemySpawner, Transform[] wayPoints)
     {
@@ -86,12 +103,14 @@ public class Enemy : MonoBehaviour
         // 모든 wayPoint를 지났다면 오브젝트 삭제
         else
         {
+            dropGold = 0;
+
             OnDie(EnemyDestroyType.Arrive);
         }
     }
 
     public void OnDie(EnemyDestroyType type)
     {
-        enemySpawner.DestroyEnemy(type, this);
+        enemySpawner.DestroyEnemy(type, this, dropGold);
     }
 }

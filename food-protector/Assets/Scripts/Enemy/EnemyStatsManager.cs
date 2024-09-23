@@ -10,23 +10,41 @@ public class EnemyStatsManager : MonoBehaviour
 
     private Dictionary<string, float> enemyFoodDecreases = new Dictionary<string, float>();
 
+    private Dictionary<string, float> enemyDropGolds = new Dictionary<string, float>();
+
     private void Awake()
     {
-        // 적 유닛 별 "이동속도"
-        enemySpeeds.Add("Seagull", 10f);
+        AddEnemySpeedList();
+        AddEnemyHPList();
+        AddEnemyFoodDecreases();
+        AddEnemyDropGolds();
+    }
 
-        // 적 유닛 별 "체력"
+    private void AddEnemySpeedList()
+    {
+        enemySpeeds.Add("Seagull", 1f);
+    }
+
+    private void AddEnemyHPList()
+    {
         enemyMaxHPs.Add("Seagull", 5f);
+    }
 
-        // 적 유닛 별 "감소 식량"
+    private void AddEnemyFoodDecreases()
+    {
         enemyFoodDecreases.Add("Seagull", 5f);
+    }
+
+    private void AddEnemyDropGolds()
+    {
+        enemyDropGolds.Add("Seagull", 10f);
     }
 
     public float GetSpeed(string enemyType)
     {
-        if (enemySpeeds.TryGetValue(enemyType, out float maxSpeed))
+        if (enemySpeeds.TryGetValue(enemyType, out float speed))
         {
-            return maxSpeed;
+            return speed;
         }
         else
         {
@@ -50,9 +68,22 @@ public class EnemyStatsManager : MonoBehaviour
 
     public float GetDecreaseFoods(string enemyType)
     {
-        if (enemyFoodDecreases.TryGetValue(enemyType, out float maxFood))
+        if (enemyFoodDecreases.TryGetValue(enemyType, out float stolenFood))
         {
-            return maxFood;
+            return stolenFood;
+        }
+        else
+        {
+            Debug.LogError("Enemy type not found: " + enemyType);
+            return 0f;
+        }
+    }
+
+    public float GetDropGold(string enemyType)
+    {
+        if (enemyDropGolds.TryGetValue(enemyType, out float Golds))
+        {
+            return Golds;
         }
         else
         {

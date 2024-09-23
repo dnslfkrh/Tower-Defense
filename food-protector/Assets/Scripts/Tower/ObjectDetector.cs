@@ -17,7 +17,7 @@ public class ObjectDetector : MonoBehaviour
     {
         mainCamera = Camera.main;
     }
-
+    
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -28,6 +28,7 @@ public class ObjectDetector : MonoBehaviour
             {
                 if (hit.transform.CompareTag("Tile"))
                 {
+                    Debug.Log("Å¸¿ö");
                     towerSpawner.SpawnTower(hit.transform);
                 }
             }
