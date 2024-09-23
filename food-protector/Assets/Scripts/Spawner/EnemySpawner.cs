@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
     private GameObject enemyPrefab;
-    
+
     [SerializeField]
     private float spawnTime;
 
@@ -23,6 +23,9 @@ public class EnemySpawner : MonoBehaviour
     private PlayerHP playerHP;
 
     private List<Enemy> enemyList;
+
+    [SerializeField]
+    private EnemyStatsManager enemyStatsManager;
 
     public List<Enemy> EnemyList => enemyList;
 
@@ -54,7 +57,11 @@ public class EnemySpawner : MonoBehaviour
         // 적이 목표 지점에 도착하면 음식 감소
         if (type == EnemyDestroyType.Arrive)
         {
-            playerHP.DecreaseFood(1);
+            EnemyHP enemyHP = enemy.GetComponent<EnemyHP>();
+
+            float decreaseAmount = enemyStatsManager.GetDecreaseFoods(enemyHP.enemyType);
+
+            playerHP.DecreaseFood(decreaseAmount);
         }
 
         enemyList.Remove(enemy);

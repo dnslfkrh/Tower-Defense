@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyHP : MonoBehaviour
 {
     [SerializeField]
-    private string enemyType;
+    public string enemyType;
 
     private float currentHP;
     private bool isDie = false;
