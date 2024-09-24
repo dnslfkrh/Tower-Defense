@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject enemyPrefab;
+    //[SerializeField]
+    //private GameObject enemyPrefab;
 
-    [SerializeField]
-    private float spawnTime;
+    //[SerializeField]
+    //private float spawnTime;
 
     [SerializeField]
     private GameObject enemyHPSliderPrefab;
@@ -30,20 +30,33 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private PlayerGold playerGold;
 
+    private Wave currentWave;
+    
     public List<Enemy> EnemyList => enemyList;
+
 
     private void Awake()
     {
         enemyList = new List<Enemy>();
+
+        // StartCoroutine("SpawnEnemy"); // 자동 시작 방지
+    }
+
+    public void StartWave(Wave wave) // 원하는 타이밍에 시작할 수 있도록
+    {
+        currentWave = wave;
 
         StartCoroutine("SpawnEnemy");
     }
 
     private IEnumerator SpawnEnemy()
     {
-        while (true)
+        int spawnEnemyCount = 0;
+
+        while (spawnEnemyCount < currentWave.maxEnemyCount)
         {
-            GameObject clone = Instantiate(enemyPrefab);
+            int enemyIndex = Random.Range(0, currentWave.enemyPrefabs.Length); // 랜덤 생성
+            GameObject clone = Instantiate(currentWave.enemyPrefabs[enemyIndex]);
             Enemy enemy = clone.GetComponent<Enemy>();
 
             enemy.Setup(this, wayPoints);
@@ -51,7 +64,9 @@ public class EnemySpawner : MonoBehaviour
 
             SpawnEnemyHPSlider(clone);
 
-            yield return new WaitForSeconds(spawnTime);
+            spawnEnemyCount ++;
+
+            yield return new WaitForSeconds(currentWave.spawnTime);
         }
     }
 

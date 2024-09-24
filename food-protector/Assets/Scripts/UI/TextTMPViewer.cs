@@ -12,10 +12,16 @@ public class TextTMPViewer : MonoBehaviour
     private TextMeshProUGUI textPlayerGold;
 
     [SerializeField]
+    private TextMeshPro textWave;
+
+    [SerializeField]
     private PlayerHP playerHP;
 
     [SerializeField]
     private PlayerGold playerGold;
+
+    [SerializeField]
+    private WaveSystem waveSystem;
 
     private void Update()
     {
@@ -24,5 +30,8 @@ public class TextTMPViewer : MonoBehaviour
 
         // 가진 골드
         textPlayerGold.text = playerGold.CurrentGold.ToString();
+
+        // 웨이브 정보
+        textWave.text = waveSystem.CurrentWave + "/" + waveSystem.MaxWave;
     }
 }
