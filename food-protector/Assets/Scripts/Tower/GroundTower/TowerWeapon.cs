@@ -24,7 +24,7 @@ public class TowerWeapon : MonoBehaviour
     private WeaponState weaponState = WeaponState.SearchTarget;
 
     private Transform attackTarget = null;
-    
+
     private EnemySpawner enemySpawner;
 
     public void Setup(EnemySpawner enemySpawner)
@@ -71,10 +71,14 @@ public class TowerWeapon : MonoBehaviour
             {
                 float distance = Vector3.Distance(enemySpawner.EnemyList[i].transform.position, transform.position);
 
-                if (distance <= attackRange && distance <= closestDistSqr)
+                if (enemySpawner.EnemyList[i].CompareTag("Ground") && distance <= attackRange && distance <= closestDistSqr) // Áö»ó
                 {
                     closestDistSqr = distance;
                     attackTarget = enemySpawner.EnemyList[i].transform;
+                }
+                else
+                {
+                    yield return null;
                 }
             }
 

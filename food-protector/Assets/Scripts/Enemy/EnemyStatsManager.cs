@@ -22,22 +22,26 @@ public class EnemyStatsManager : MonoBehaviour
 
     private void AddEnemySpeedList()
     {
-        enemySpeeds.Add("Seagull", 1f);
+        enemySpeeds.Add("Seagull", 10f);
+        enemySpeeds.Add("Crab", 15f);
     }
 
     private void AddEnemyHPList()
     {
         enemyMaxHPs.Add("Seagull", 5f);
+        enemyMaxHPs.Add("Crab", 5f);
     }
 
     private void AddEnemyFoodDecreases()
     {
         enemyFoodDecreases.Add("Seagull", 5f);
+        enemyFoodDecreases.Add("Crab", 5f);
     }
 
     private void AddEnemyDropGolds()
     {
         enemyDropGolds.Add("Seagull", 10f);
+        enemyDropGolds.Add("Crab", 10f);
     }
 
     public float GetSpeed(string enemyType)

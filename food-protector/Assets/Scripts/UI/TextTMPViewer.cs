@@ -12,7 +12,7 @@ public class TextTMPViewer : MonoBehaviour
     private TextMeshProUGUI textPlayerGold;
 
     [SerializeField]
-    private TextMeshPro textWave;
+    private TextMeshProUGUI textWave;
 
     [SerializeField]
     private PlayerHP playerHP;

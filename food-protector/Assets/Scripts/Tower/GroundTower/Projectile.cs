@@ -33,10 +33,11 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Enemy"))
+        if (!collision.CompareTag("Ground") && !collision.CompareTag("Air"))
         {
             return;
         }
+
         if (collision.transform != target)
         {
             return;
@@ -45,4 +46,5 @@ public class Projectile : MonoBehaviour
         collision.GetComponent<EnemyHP>().TakeDamage(damage);
         Destroy(gameObject);
     }
+
 }
