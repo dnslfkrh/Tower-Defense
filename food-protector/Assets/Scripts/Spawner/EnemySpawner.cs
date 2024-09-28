@@ -77,7 +77,7 @@ public class EnemySpawner : MonoBehaviour
         {
             EnemyHP enemyHP = enemy.GetComponent<EnemyHP>();
 
-            float decreaseAmount = enemyStatsManager.GetDecreaseFoods(enemyHP.enemyType);
+            float decreaseAmount = enemyStatsManager.GetDecreaseFood(enemyHP.enemyType);
 
             playerHP.DecreaseFood(decreaseAmount);
         }

@@ -8,7 +8,7 @@ public enum EnemyDestroyType { kill = 0, Arrive }
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    private float rotationSpeed = 5f;
+    private float rotationSpeed = 10f;
     
     private int wayPointCount;
 
