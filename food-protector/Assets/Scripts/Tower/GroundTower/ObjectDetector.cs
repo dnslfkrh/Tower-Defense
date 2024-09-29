@@ -7,6 +7,9 @@ public class ObjectDetector : MonoBehaviour
     [SerializeField]
     private TowerSpawner towerSpawner;
 
+    [SerializeField]
+    private TowerDataViewer towerDataViewer;
+
     private Camera mainCamera;
     
     private Ray ray;
@@ -30,6 +33,10 @@ public class ObjectDetector : MonoBehaviour
                 {
                     Debug.Log("Å¸¿ö");
                     towerSpawner.SpawnTower(hit.transform);
+                }
+                else if (hit.transform.CompareTag("Tower"))
+                {
+                    towerDataViewer.OnPanel(hit.transform);
                 }
             }
         }

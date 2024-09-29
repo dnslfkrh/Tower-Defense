@@ -42,9 +42,10 @@ GameObject:
   - component: {fileID: 9117369438492805060}
   - component: {fileID: 3630936728371725155}
   - component: {fileID: 1553459789875740492}
+  - component: {fileID: 6509717236013467863}
   m_Layer: 0
   m_Name: Catapult
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,3 +134,25 @@ MonoBehaviour:
   spawnPoint: {fileID: 2671705904439766720}
   attackRate: 0.5
   attackRange: 2
+  attackDamage: 1
+--- !u!65 &6509717236013467863
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7643075888095602507}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}

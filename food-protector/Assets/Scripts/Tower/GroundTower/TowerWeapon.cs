@@ -27,6 +27,10 @@ public class TowerWeapon : MonoBehaviour
 
     private EnemySpawner enemySpawner;
 
+    public float Damage => attackDamage;
+    public float Rate => attackRate;
+    public float Range => attackRange;
+
     public void Setup(EnemySpawner enemySpawner)
     {
         this.enemySpawner = enemySpawner;

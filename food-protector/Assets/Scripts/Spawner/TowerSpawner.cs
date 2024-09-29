@@ -16,6 +16,12 @@ public class TowerSpawner : MonoBehaviour
     [SerializeField]
     private PlayerGold playerGold;
 
+    private bool isOnTowerButton = false;
+
+    public void ReadyToSpawnTower()
+    {
+
+    }
 
     public void SpawnTower(Transform tileTransform)
     {
@@ -36,7 +42,8 @@ public class TowerSpawner : MonoBehaviour
 
         playerGold.CurrentGold -= towerBuiltdGold;
 
-        GameObject clone = Instantiate(towerPrefab, tileTransform.position, Quaternion.identity);
+        Vector3 position = tileTransform.position + Vector3.back;
+        GameObject clone = Instantiate(towerPrefab, position, Quaternion.identity);
 
         clone.GetComponent<TowerWeapon>().Setup(enemySpawner);
     }
