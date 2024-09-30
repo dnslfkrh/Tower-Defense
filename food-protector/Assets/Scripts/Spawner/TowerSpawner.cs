@@ -23,6 +23,11 @@ public class TowerSpawner : MonoBehaviour
 
     public void ReadyToSpawnTower()
     {
+        if (isOnTowerButton == true)
+        {
+            return;
+        }
+
         if (towerBuiltdGold > playerGold.CurrentGold)
         {
             systemTextViewer.PrintText(SystemType.Money);
@@ -30,16 +35,12 @@ public class TowerSpawner : MonoBehaviour
         }
 
         isOnTowerButton = true;
+
+        //StartCoroutine("OnTowerCancelSystem");
     }
 
     public void SpawnTower(Transform tileTransform)
     {
-        //if (towerBuiltdGold > playerGold.CurrentGold)
-        //{
-        //    systemTextViewer.PrintText(SystemType.Money);
-        //    return;
-        //}
-
         if (isOnTowerButton == false)
         {
             return;
@@ -63,5 +64,20 @@ public class TowerSpawner : MonoBehaviour
         GameObject clone = Instantiate(towerPrefab, position, Quaternion.identity);
 
         clone.GetComponent<TowerWeapon>().Setup(enemySpawner, playerGold, tile);
+
+        //StopCoroutine("OnTowerCancelSystem");
     }
+    //private IEnumerator OnTowerCancelSystem()
+    //{
+    //    while (true)
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.Escape))
+    //        {
+    //            isOnTowerButton = false;
+    //            break;
+    //        }
+    //    }
+
+    //    yield return null;
+    //}
 }
