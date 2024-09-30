@@ -27,7 +27,7 @@ public class TowerSpawner : MonoBehaviour
     {
         if (towerBuiltdGold > playerGold.CurrentGold)
         {
-            Debug.Log("돈이 부족합니다." + playerGold.CurrentGold);
+            Debug.Log("돈이 부족합니다.");
             return;
         }
 
@@ -45,6 +45,6 @@ public class TowerSpawner : MonoBehaviour
         Vector3 position = tileTransform.position + Vector3.back;
         GameObject clone = Instantiate(towerPrefab, position, Quaternion.identity);
 
-        clone.GetComponent<TowerWeapon>().Setup(enemySpawner);
+        clone.GetComponent<TowerWeapon>().Setup(enemySpawner, playerGold, tile);
     }
 }

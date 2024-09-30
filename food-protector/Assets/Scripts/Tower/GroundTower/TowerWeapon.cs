@@ -21,19 +21,24 @@ public class TowerWeapon : MonoBehaviour
     [SerializeField]
     private int attackDamage = 1; // 타워 데미지
 
+    [SerializeField]
+    private int sellPrice = 25; // 타워 판매 가격
+
     private WeaponState weaponState = WeaponState.SearchTarget;
-
     private Transform attackTarget = null;
-
     private EnemySpawner enemySpawner;
+    private PlayerGold playerGold;
+    private Tile ownerTile;
 
     public float Damage => attackDamage;
     public float Rate => attackRate;
     public float Range => attackRange;
 
-    public void Setup(EnemySpawner enemySpawner)
+    public void Setup(EnemySpawner enemySpawner, PlayerGold playerGold, Tile ownerTile)
     {
         this.enemySpawner = enemySpawner;
+        this.playerGold = playerGold;
+        this.ownerTile = ownerTile;
 
         ChangeState(WeaponState.SearchTarget);
     }
@@ -126,5 +131,12 @@ public class TowerWeapon : MonoBehaviour
         GameObject clone = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
 
         clone.GetComponent<Projectile>().Setup(attackTarget, attackDamage);
+    }
+    
+    public void Sell()
+    {
+        playerGold.CurrentGold += sellPrice;
+        ownerTile.IsBuildTower = false;
+        Destroy(gameObject);
     }
 }

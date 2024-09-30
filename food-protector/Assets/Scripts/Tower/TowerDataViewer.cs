@@ -53,4 +53,10 @@ public class TowerDataViewer : MonoBehaviour
         textRate.text = "Rate: " + currentTower.Rate;
         textRange.text = "Range: " + currentTower.Range;
     }
+
+    public void OnClickEventTowerSell()
+    {
+        currentTower.Sell();
+        OffPanel();
+    }
 }
