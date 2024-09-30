@@ -2,21 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WeaponState { SearchTarget = 0, AttackToTarget }
+public enum WeaponType { Catapult = 0, Razer = 0}
+public enum WeaponState { SearchTarget = 0, TryAttackCatapult }
 
 public class TowerWeapon : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject projectilePrefab;
-
+    [Header("Common")]
     [SerializeField]
     private Transform spawnPoint;
+    
+    [SerializeField]
+    private WeaponType weaponType;
 
     [SerializeField]
     private float attackRate = 0.5f;
 
     [SerializeField]
     private float attackRange = 2.0f;
+
+    [Header("Catapult")]
+    [SerializeField]
+    private GameObject projectilePrefab;
 
     [SerializeField]
     private int attackDamage = 1; // 타워 데미지
@@ -74,54 +80,119 @@ public class TowerWeapon : MonoBehaviour
     {
         while (true)
         {
-            float closestDistSqr = Mathf.Infinity;
-
-            for (int i = 0; i < enemySpawner.EnemyList.Count; ++i)
-            {
-                float distance = Vector3.Distance(enemySpawner.EnemyList[i].transform.position, transform.position);
-
-                if (enemySpawner.EnemyList[i].CompareTag("Ground") && distance <= attackRange && distance <= closestDistSqr) // 지상
-                {
-                    closestDistSqr = distance;
-                    attackTarget = enemySpawner.EnemyList[i].transform;
-                }
-                else
-                {
-                    yield return null;
-                }
-            }
+            attackTarget = FindClosestAttackTarget();
 
             if (attackTarget != null)
             {
-                ChangeState(WeaponState.AttackToTarget);
+                ChangeState(WeaponState.TryAttackCatapult);
             }
 
             yield return null;
         }
     }
 
-    private IEnumerator AttackToTarget()
+    //private IEnumerator SearchTarget()
+    //{
+    //    while (true)
+    //    {
+    //        float closestDistSqr = Mathf.Infinity;
+
+    //        for (int i = 0; i < enemySpawner.EnemyList.Count; ++i)
+    //        {
+    //            float distance = Vector3.Distance(enemySpawner.EnemyList[i].transform.position, transform.position);
+
+    //            if (enemySpawner.EnemyList[i].CompareTag("Ground") && distance <= attackRange && distance <= closestDistSqr) // 지상
+    //            {
+    //                closestDistSqr = distance;
+    //                attackTarget = enemySpawner.EnemyList[i].transform;
+    //            }
+    //            else
+    //            {
+    //                yield return null;
+    //            }
+    //        }
+
+    //        if (attackTarget != null)
+    //        {
+    //            ChangeState(WeaponState.TryAttackCatapult);
+    //        }
+
+    //        yield return null;
+    //    }
+    //}
+
+    private Transform FindClosestAttackTarget()
+    {
+        float closestDistSqr = Mathf.Infinity;
+
+        for (int i = 0; i < enemySpawner.EnemyList.Count; ++i)
+        {
+            float distance = Vector3.Distance(enemySpawner.EnemyList[i].transform.position, transform.position);
+
+            if (enemySpawner.EnemyList[i].CompareTag("Ground") && distance <= attackRange && distance <= closestDistSqr) // 지상
+            {
+                closestDistSqr = distance;
+                attackTarget = enemySpawner.EnemyList[i].transform;
+            }
+
+        }
+
+        return attackTarget;
+    }
+
+    //private IEnumerator AttackToTarget()
+    //{
+    //    while (true)
+    //    {
+    //        if (attackTarget == null)
+    //        {
+    //            ChangeState(WeaponState.SearchTarget);
+    //            break;
+    //        }
+
+    //        float distance = Vector3.Distance(attackTarget.position, transform.position);
+    //        if (distance > attackRange)
+    //        {
+    //            attackTarget = null;
+    //            ChangeState(WeaponState.SearchTarget);
+    //            break;
+    //        }
+
+    //        yield return new WaitForSeconds(attackRate);
+
+    //        SpawnProjectile();
+    //    }
+    //}
+
+    private IEnumerator TryAttackCatapult()
     {
         while (true)
         {
-            if (attackTarget == null)
+            if (IsPossibleToAttackTarget() == false)
             {
-                ChangeState(WeaponState.SearchTarget);
-                break;
-            }
-
-            float distance = Vector3.Distance(attackTarget.position, transform.position);
-            if (distance > attackRange)
-            {
-                attackTarget = null;
                 ChangeState(WeaponState.SearchTarget);
                 break;
             }
 
             yield return new WaitForSeconds(attackRate);
-
-            SpawnProjectile();
         }
+    }
+
+    private bool IsPossibleToAttackTarget()
+    {
+        if (attackTarget == null)
+        {
+            return false;
+        }
+
+        float distance = Vector3.Distance(attackTarget.position, transform.position);
+        if (distance > attackRange)
+        {
+            attackTarget = null;
+            ChangeState(WeaponState.SearchTarget);
+        }
+
+        return true;
     }
 
     private void SpawnProjectile()
