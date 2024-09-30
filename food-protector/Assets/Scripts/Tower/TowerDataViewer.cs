@@ -18,6 +18,9 @@ public class TowerDataViewer : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textRange;
 
+    //[SerializeField]
+    //private SystemTextViewer systemTextViewer;
+
     private TowerWeapon currentTower;
 
     private void Awake()

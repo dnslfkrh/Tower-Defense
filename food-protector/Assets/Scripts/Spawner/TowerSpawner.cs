@@ -16,18 +16,25 @@ public class TowerSpawner : MonoBehaviour
     [SerializeField]
     private PlayerGold playerGold;
 
+    [SerializeField]
+    private SystemTextViewer systemTextViewer;
+
     private bool isOnTowerButton = false;
 
     public void ReadyToSpawnTower()
     {
-
+        if (towerBuiltdGold > playerGold.CurrentGold)
+        {
+            systemTextViewer.PrintText(SystemType.Money);
+            return;
+        }
     }
 
     public void SpawnTower(Transform tileTransform)
     {
         if (towerBuiltdGold > playerGold.CurrentGold)
         {
-            Debug.Log("돈이 부족합니다.");
+            systemTextViewer.PrintText(SystemType.Money);
             return;
         }
 
@@ -35,6 +42,7 @@ public class TowerSpawner : MonoBehaviour
 
         if (tile.IsBuildTower == true)
         {
+            systemTextViewer.PrintText(SystemType.Build);
             return;
         }
 
