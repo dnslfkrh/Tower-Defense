@@ -28,13 +28,20 @@ public class TowerSpawner : MonoBehaviour
             systemTextViewer.PrintText(SystemType.Money);
             return;
         }
+
+        isOnTowerButton = true;
     }
 
     public void SpawnTower(Transform tileTransform)
     {
-        if (towerBuiltdGold > playerGold.CurrentGold)
+        //if (towerBuiltdGold > playerGold.CurrentGold)
+        //{
+        //    systemTextViewer.PrintText(SystemType.Money);
+        //    return;
+        //}
+
+        if (isOnTowerButton == false)
         {
-            systemTextViewer.PrintText(SystemType.Money);
             return;
         }
 
@@ -45,6 +52,8 @@ public class TowerSpawner : MonoBehaviour
             systemTextViewer.PrintText(SystemType.Build);
             return;
         }
+
+        isOnTowerButton = false;
 
         tile.IsBuildTower = true;
 
