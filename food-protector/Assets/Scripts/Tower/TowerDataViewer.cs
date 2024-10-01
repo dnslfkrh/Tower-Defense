@@ -6,8 +6,8 @@ using TMPro;
 
 public class TowerDataViewer : MonoBehaviour
 {
-    [SerializeField]
-    private Image imageTower;
+    //[SerializeField]
+    //private Image imageTower;
 
     [SerializeField]
     private TextMeshProUGUI textDamage;
