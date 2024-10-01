@@ -40,7 +40,7 @@ public class EnemyStatsManager : MonoBehaviour
         enemyStatsDictionary.Add("Cow", new EnemyStats(6f, 16f, 7f, 20f));
         enemyStatsDictionary.Add("Monkey", new EnemyStats(11f, 8f, 5f, 11f));
         enemyStatsDictionary.Add("Fox", new EnemyStats(13f, 9f, 6f, 12f));
-        enemyStatsDictionary.Add("Gull", new EnemyStats(10f, 5f, 5f, 10f));
+        enemyStatsDictionary.Add("Seagull", new EnemyStats(1, 5f, 5f, 10f));
         enemyStatsDictionary.Add("Crow", new EnemyStats(11f, 4f, 4f, 8f));
         enemyStatsDictionary.Add("Eagle", new EnemyStats(14f, 7f, 8f, 15f));
         enemyStatsDictionary.Add("Owl", new EnemyStats(12f, 6f, 7f, 12f));

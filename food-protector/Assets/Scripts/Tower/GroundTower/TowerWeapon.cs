@@ -174,6 +174,8 @@ public class TowerWeapon : MonoBehaviour
                 break;
             }
 
+            SpawnProjectile();
+
             yield return new WaitForSeconds(attackRate);
         }
     }
