@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1734337257613879656}
   - component: {fileID: 4365118291338669592}
   - component: {fileID: 7759653890848291158}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Camel
   m_TagString: Ground
   m_Icon: {fileID: 0}

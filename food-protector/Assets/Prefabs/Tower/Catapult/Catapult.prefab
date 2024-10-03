@@ -130,11 +130,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6faa3c8c6c97e834eb287e4438274697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 938914979186878781, guid: 0741bca875cedd040a4f70c952ec8615, type: 3}
   spawnPoint: {fileID: 2671705904439766720}
+  weaponType: 0
   attackRate: 0.5
   attackRange: 2
+  projectilePrefab: {fileID: 938914979186878781, guid: 0741bca875cedd040a4f70c952ec8615, type: 3}
   attackDamage: 1
+  sellPrice: 25
+  lineRenderer: {fileID: 0}
+  hitEffect: {fileID: 0}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &6509717236013467863
 BoxCollider:
   m_ObjectHideFlags: 0

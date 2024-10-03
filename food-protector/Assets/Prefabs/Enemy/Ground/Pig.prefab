@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3644282592158888508}
   - component: {fileID: 1977655349162128043}
   - component: {fileID: 1272096347323734395}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pig
   m_TagString: Ground
   m_Icon: {fileID: 0}

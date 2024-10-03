@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7139651992451487739}
   - component: {fileID: 6363129573873183174}
   - component: {fileID: 7740233517346204354}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SeaTurtle
   m_TagString: Ground
   m_Icon: {fileID: 0}

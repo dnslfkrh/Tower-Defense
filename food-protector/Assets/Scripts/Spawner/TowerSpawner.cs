@@ -5,13 +5,10 @@ using UnityEngine;
 public class TowerSpawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject towerPrefab;
+    private GameObject[] towerPrefab;
 
     [SerializeField]
     private EnemySpawner enemySpawner;
-
-    [SerializeField]
-    private int towerBuiltdGold = 50; // 타워 건설 비용
 
     [SerializeField]
     private PlayerGold playerGold;
@@ -19,16 +16,31 @@ public class TowerSpawner : MonoBehaviour
     [SerializeField]
     private SystemTextViewer systemTextViewer;
 
-    private bool isOnTowerButton = false;
+    [SerializeField]
+    private TowerCostManager towerCostManager;
 
-    public void ReadyToSpawnTower()
+    private int towerBuildGold;
+    private bool isOnTowerButton = false;
+    private string towerType;
+
+    private Dictionary<string, int> towerTypeIndex = new Dictionary<string, int>()
     {
-        if (isOnTowerButton == true)
+        { "Catapult", 0 },
+        { "Laser", 1 },
+    };
+
+    public void ReadyToSpawnTower(string type)
+    {
+        towerType = type;
+
+        towerBuildGold = towerCostManager.GetTowerCost(type);
+
+        if (isOnTowerButton)
         {
             return;
         }
 
-        if (towerBuiltdGold > playerGold.CurrentGold)
+        if (towerBuildGold > playerGold.CurrentGold)
         {
             systemTextViewer.PrintText(SystemType.Money);
             return;
@@ -39,14 +51,14 @@ public class TowerSpawner : MonoBehaviour
 
     public void SpawnTower(Transform tileTransform)
     {
-        if (isOnTowerButton == false)
+        if (!isOnTowerButton)
         {
             return;
         }
 
         Tile tile = tileTransform.GetComponent<Tile>();
 
-        if (tile.IsBuildTower == true)
+        if (tile.IsBuildTower)
         {
             systemTextViewer.PrintText(SystemType.Build);
             return;
@@ -56,11 +68,17 @@ public class TowerSpawner : MonoBehaviour
 
         tile.IsBuildTower = true;
 
-        playerGold.CurrentGold -= towerBuiltdGold;
+        playerGold.CurrentGold -= towerBuildGold;
 
-        Vector3 position = tileTransform.position + Vector3.back;
-        GameObject clone = Instantiate(towerPrefab, position, Quaternion.identity);
-
-        clone.GetComponent<TowerWeapon>().Setup(enemySpawner, playerGold, tile);
+        if (towerTypeIndex.TryGetValue(towerType, out int towerIndex))
+        {
+            Vector3 position = tileTransform.position + Vector3.back;
+            GameObject clone = Instantiate(towerPrefab[towerIndex], position, Quaternion.identity);
+            clone.GetComponent<TowerWeapon>().Setup(enemySpawner, playerGold, tile);
+        }
+        else
+        {
+            Debug.LogError("Invalid tower type: " + towerType);
+        }
     }
 }

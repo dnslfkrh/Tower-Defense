@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
-public enum WeaponType { Catapult = 0, Razer = 0}
-public enum WeaponState { SearchTarget = 0, TryAttackCatapult }
+public enum WeaponType { Catapult = 0, Laser, }
+public enum WeaponState { SearchTarget = 0, TryAttackCatapult, TryAttackLaser, }
 
 public class TowerWeapon : MonoBehaviour
 {
@@ -20,15 +21,26 @@ public class TowerWeapon : MonoBehaviour
     [SerializeField]
     private float attackRange = 2.0f;
 
-    [Header("Catapult")]
-    [SerializeField]
-    private GameObject projectilePrefab;
-
     [SerializeField]
     private int attackDamage = 1; // 타워 데미지
 
     [SerializeField]
     private int sellPrice = 25; // 타워 판매 가격
+
+    [Header("Catapult")]
+    [SerializeField]
+    private GameObject projectilePrefab;
+
+    [Header("Laser")]
+    [SerializeField]
+    private LineRenderer lineRenderer;
+
+    [SerializeField]
+    private Transform hitEffect;
+
+    [SerializeField]
+    private LayerMask targetLayer;
+
 
     private WeaponState weaponState = WeaponState.SearchTarget;
     private Transform attackTarget = null;
@@ -84,42 +96,19 @@ public class TowerWeapon : MonoBehaviour
 
             if (attackTarget != null)
             {
-                ChangeState(WeaponState.TryAttackCatapult);
+                if (weaponType == WeaponType.Catapult)
+                {
+                    ChangeState(WeaponState.TryAttackCatapult);
+                }
+                else if (weaponType == WeaponType.Laser)
+                {
+                    ChangeState(WeaponState.TryAttackLaser);
+                }
             }
 
             yield return null;
         }
     }
-
-    //private IEnumerator SearchTarget()
-    //{
-    //    while (true)
-    //    {
-    //        float closestDistSqr = Mathf.Infinity;
-
-    //        for (int i = 0; i < enemySpawner.EnemyList.Count; ++i)
-    //        {
-    //            float distance = Vector3.Distance(enemySpawner.EnemyList[i].transform.position, transform.position);
-
-    //            if (enemySpawner.EnemyList[i].CompareTag("Ground") && distance <= attackRange && distance <= closestDistSqr) // 지상
-    //            {
-    //                closestDistSqr = distance;
-    //                attackTarget = enemySpawner.EnemyList[i].transform;
-    //            }
-    //            else
-    //            {
-    //                yield return null;
-    //            }
-    //        }
-
-    //        if (attackTarget != null)
-    //        {
-    //            ChangeState(WeaponState.TryAttackCatapult);
-    //        }
-
-    //        yield return null;
-    //    }
-    //}
 
     private Transform FindClosestAttackTarget()
     {
@@ -129,40 +118,16 @@ public class TowerWeapon : MonoBehaviour
         {
             float distance = Vector3.Distance(enemySpawner.EnemyList[i].transform.position, transform.position);
 
-            if (enemySpawner.EnemyList[i].CompareTag("Ground") && distance <= attackRange && distance <= closestDistSqr) // 지상
+            if (enemySpawner.EnemyList[i].CompareTag("Ground") && distance <= attackRange && distance <= closestDistSqr)
             {
                 closestDistSqr = distance;
                 attackTarget = enemySpawner.EnemyList[i].transform;
+                Debug.Log("Target found: " + attackTarget.name);  // Debug log
             }
-
         }
-
         return attackTarget;
     }
 
-    //private IEnumerator AttackToTarget()
-    //{
-    //    while (true)
-    //    {
-    //        if (attackTarget == null)
-    //        {
-    //            ChangeState(WeaponState.SearchTarget);
-    //            break;
-    //        }
-
-    //        float distance = Vector3.Distance(attackTarget.position, transform.position);
-    //        if (distance > attackRange)
-    //        {
-    //            attackTarget = null;
-    //            ChangeState(WeaponState.SearchTarget);
-    //            break;
-    //        }
-
-    //        yield return new WaitForSeconds(attackRate);
-
-    //        SpawnProjectile();
-    //    }
-    //}
 
     private IEnumerator TryAttackCatapult()
     {
@@ -177,6 +142,54 @@ public class TowerWeapon : MonoBehaviour
             SpawnProjectile();
 
             yield return new WaitForSeconds(attackRate);
+        }
+    }
+
+    private IEnumerator TryAttackLaser()
+    {
+        EnableLaser();
+
+        while (true)
+        {
+            if (IsPossibleToAttackTarget() == false)
+            {
+                DisableLaser();
+                ChangeState(WeaponState.SearchTarget);
+                break;
+            }
+
+            SpawnLaser();
+
+            yield return null;
+        }
+    }
+
+    private void EnableLaser()
+    {
+        lineRenderer.gameObject.SetActive(true);
+        hitEffect.gameObject.SetActive(true);
+    }
+
+    private void DisableLaser()
+    {
+        lineRenderer.gameObject.SetActive(false);
+        hitEffect.gameObject.SetActive(false);
+    }
+
+    private void SpawnLaser()
+    {
+        Vector3 direction = attackTarget.position - spawnPoint.position;
+        RaycastHit2D[] hit = Physics2D.RaycastAll(spawnPoint.position, direction, attackRange, targetLayer);
+
+        for (int i = 0; i < hit.Length; ++i)
+        {
+            if (hit[i].transform == attackTarget)
+            {
+                lineRenderer.SetPosition(0, spawnPoint.position);
+                lineRenderer.SetPosition(1, new Vector3(hit[i].point.x, hit[i].point.y, 0) + Vector3.back);
+                hitEffect.position = hit[i].point;
+                attackTarget.GetComponent<EnemyHP>().TakeDamage(attackDamage * Time.deltaTime);
+            }
         }
     }
 
