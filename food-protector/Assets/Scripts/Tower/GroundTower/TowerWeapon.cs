@@ -11,7 +11,7 @@ public class TowerWeapon : MonoBehaviour
     [Header("Common")]
     [SerializeField]
     private Transform spawnPoint;
-    
+
     [SerializeField]
     private WeaponType weaponType;
 
@@ -40,7 +40,6 @@ public class TowerWeapon : MonoBehaviour
 
     [SerializeField]
     private LayerMask targetLayer;
-
 
     private WeaponState weaponState = WeaponState.SearchTarget;
     private Transform attackTarget = null;
@@ -178,6 +177,12 @@ public class TowerWeapon : MonoBehaviour
 
     private void SpawnLaser()
     {
+        if (attackTarget == null)
+        {
+            DisableLaser();
+            return;
+        }
+
         Vector3 direction = attackTarget.position - spawnPoint.position;
         RaycastHit2D[] hit = Physics2D.RaycastAll(spawnPoint.position, direction, attackRange, targetLayer);
 
@@ -188,7 +193,11 @@ public class TowerWeapon : MonoBehaviour
                 lineRenderer.SetPosition(0, spawnPoint.position);
                 lineRenderer.SetPosition(1, new Vector3(hit[i].point.x, hit[i].point.y, 0) + Vector3.back);
                 hitEffect.position = hit[i].point;
-                attackTarget.GetComponent<EnemyHP>().TakeDamage(attackDamage * Time.deltaTime);
+
+                if (attackTarget != null)
+                {
+                    attackTarget.GetComponent<EnemyHP>().TakeDamage(attackDamage * Time.deltaTime);
+                }
             }
         }
     }
@@ -201,10 +210,13 @@ public class TowerWeapon : MonoBehaviour
         }
 
         float distance = Vector3.Distance(attackTarget.position, transform.position);
+
         if (distance > attackRange)
         {
             attackTarget = null;
+            DisableLaser();
             ChangeState(WeaponState.SearchTarget);
+            return false;
         }
 
         return true;
@@ -218,7 +230,7 @@ public class TowerWeapon : MonoBehaviour
 
         clone.GetComponent<Projectile>().Setup(attackTarget, attackDamage);
     }
-    
+
     public void Sell()
     {
         playerGold.CurrentGold += sellPrice;

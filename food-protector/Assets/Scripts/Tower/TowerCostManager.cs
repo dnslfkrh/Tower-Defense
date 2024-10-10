@@ -14,6 +14,8 @@ public class TowerCostManager : MonoBehaviour
     {
         towerCostDictionary.Add("Catapult", 50);
         towerCostDictionary.Add("Laser", 50);
+        towerCostDictionary.Add("Miner", 200);
+        towerCostDictionary.Add("Kitchen", 200);
     }
 
     public int GetTowerCost(string towerType)

@@ -26,7 +26,7 @@ public class TextTMPViewer : MonoBehaviour
     private void Update()
     {
         // "남은 음식 / 시작 음식"
-        textPlayerHP.text = playerHP.CurrentFood + "/" + playerHP.MaxFood;
+        textPlayerHP.text = playerHP.CurrentFood + "";
 
         // 가진 골드
         textPlayerGold.text = playerGold.CurrentGold.ToString();

@@ -30,8 +30,13 @@ public class PlayerHP : MonoBehaviour
 
         if (currentFood <= 0)
         {
-
+            // 게임 종료
         }
+    }
+
+    public void IncreaseFood(float getFood)
+    {
+        currentFood += getFood;
     }
 
     private IEnumerator HitAlphaAnimation()

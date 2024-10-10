@@ -27,6 +27,8 @@ public class TowerSpawner : MonoBehaviour
     {
         { "Catapult", 0 },
         { "Laser", 1 },
+        { "Miner", 2 },
+        { "Kitchen", 3 },
     };
 
     public void ReadyToSpawnTower(string type)
@@ -49,6 +51,38 @@ public class TowerSpawner : MonoBehaviour
         isOnTowerButton = true;
     }
 
+    //public void SpawnTower(Transform tileTransform)
+    //{
+    //    if (!isOnTowerButton)
+    //    {
+    //        return;
+    //    }
+
+    //    Tile tile = tileTransform.GetComponent<Tile>();
+
+    //    if (tile.IsBuildTower)
+    //    {
+    //        systemTextViewer.PrintText(SystemType.Build);
+    //        return;
+    //    }
+
+    //    isOnTowerButton = false;
+
+    //    tile.IsBuildTower = true;
+
+    //    playerGold.CurrentGold -= towerBuildGold;
+
+    //    if (towerTypeIndex.TryGetValue(towerType, out int towerIndex))
+    //    {
+    //        Vector3 position = tileTransform.position + Vector3.back;
+    //        GameObject clone = Instantiate(towerPrefab[towerIndex], position, Quaternion.identity);
+    //        clone.GetComponent<TowerWeapon>().Setup(enemySpawner, playerGold, tile);
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("Invalid tower type: " + towerType);
+    //    }
+    //}
     public void SpawnTower(Transform tileTransform)
     {
         if (!isOnTowerButton)
@@ -73,8 +107,27 @@ public class TowerSpawner : MonoBehaviour
         if (towerTypeIndex.TryGetValue(towerType, out int towerIndex))
         {
             Vector3 position = tileTransform.position + Vector3.back;
+
+            if (towerPrefab[towerIndex] == null)
+            {
+                return;
+            }
+
             GameObject clone = Instantiate(towerPrefab[towerIndex], position, Quaternion.identity);
-            clone.GetComponent<TowerWeapon>().Setup(enemySpawner, playerGold, tile);
+
+            // Miner는 TowerWeapon이 필요 없음
+            if (towerType == "Miner" || towerType == "Kitchen")
+            {
+                return;
+            }
+
+            TowerWeapon towerWeapon = clone.GetComponent<TowerWeapon>();
+            if (towerWeapon == null)
+            {
+                return;
+            }
+
+            towerWeapon.Setup(enemySpawner, playerGold, tile);
         }
         else
         {
