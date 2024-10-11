@@ -51,38 +51,6 @@ public class TowerSpawner : MonoBehaviour
         isOnTowerButton = true;
     }
 
-    //public void SpawnTower(Transform tileTransform)
-    //{
-    //    if (!isOnTowerButton)
-    //    {
-    //        return;
-    //    }
-
-    //    Tile tile = tileTransform.GetComponent<Tile>();
-
-    //    if (tile.IsBuildTower)
-    //    {
-    //        systemTextViewer.PrintText(SystemType.Build);
-    //        return;
-    //    }
-
-    //    isOnTowerButton = false;
-
-    //    tile.IsBuildTower = true;
-
-    //    playerGold.CurrentGold -= towerBuildGold;
-
-    //    if (towerTypeIndex.TryGetValue(towerType, out int towerIndex))
-    //    {
-    //        Vector3 position = tileTransform.position + Vector3.back;
-    //        GameObject clone = Instantiate(towerPrefab[towerIndex], position, Quaternion.identity);
-    //        clone.GetComponent<TowerWeapon>().Setup(enemySpawner, playerGold, tile);
-    //    }
-    //    else
-    //    {
-    //        Debug.LogError("Invalid tower type: " + towerType);
-    //    }
-    //}
     public void SpawnTower(Transform tileTransform)
     {
         if (!isOnTowerButton)
@@ -121,13 +89,15 @@ public class TowerSpawner : MonoBehaviour
                 return;
             }
 
-            TowerWeapon towerWeapon = clone.GetComponent<TowerWeapon>();
-            if (towerWeapon == null)
+            ITower tower = clone.GetComponent<ITower>();
+
+            if (tower == null)
             {
                 return;
             }
-
-            towerWeapon.Setup(enemySpawner, playerGold, tile);
+// 적 스폰 여부와 관계없이 타워 세팅
+            
+            tower.Setup(enemySpawner, playerGold, tile);
         }
         else
         {

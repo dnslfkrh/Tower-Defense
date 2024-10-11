@@ -1,8 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class KitchenTower : MonoBehaviour
+public class KitchenTower : MonoBehaviour, ITower
 {
+    public float Damage => 0;
+    public float Rate => 0;
+    public float Range => 0;
+
+    private int sellPrice = 15;
+
     private PlayerHP playerHP;
 
     private void Start()
@@ -35,5 +41,22 @@ public class KitchenTower : MonoBehaviour
                 Debug.Log("이번에는 체력을 받지 못했습니다.");
             }
         }
+    }
+
+    public void Setup(EnemySpawner enemySpawner, PlayerGold playerGold, Tile ownerTile)
+    {
+
+    }
+
+    public void Sell()
+    {
+        PlayerGold playerGold = FindObjectOfType<PlayerGold>();
+        if (playerGold != null)
+        {
+            playerGold.CurrentGold += sellPrice;
+            Debug.Log("Kitchen 타워 판매 완료, 골드: " + playerGold.CurrentGold);
+        }
+
+        Destroy(gameObject);
     }
 }

@@ -1,8 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class MinerTower : MonoBehaviour
+public class MinerTower : MonoBehaviour, ITower
 {
+    public float Damage => 0;
+    public float Rate => 0;
+    public float Range => 0;
+
+    private int sellPrice = 15;
+
     private PlayerGold playerGold;
 
     private void Start()
@@ -35,6 +41,22 @@ public class MinerTower : MonoBehaviour
                 Debug.Log("이번에는 골드를 받지 못했습니다.");
             }
         }
+    }
+    public void Setup(EnemySpawner enemySpawner, PlayerGold playerGold, Tile ownerTile)
+    {
+
+    }
+
+    public void Sell()
+    {
+        PlayerGold playerGold = FindObjectOfType<PlayerGold>();
+        if (playerGold != null)
+        {
+            playerGold.CurrentGold += sellPrice;
+            Debug.Log("Micer 타워 판매 완료, 골드: " + playerGold.CurrentGold);
+        }
+
+        Destroy(gameObject);
     }
 }
 

@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    //[SerializeField]
-    //private GameObject enemyPrefab;
-
-    //[SerializeField]
-    //private float spawnTime;
-
     [SerializeField]
     private GameObject enemyHPSliderPrefab;
 
@@ -31,18 +25,14 @@ public class EnemySpawner : MonoBehaviour
     private PlayerGold playerGold;
 
     private Wave currentWave;
-    
     public List<Enemy> EnemyList => enemyList;
-
 
     private void Awake()
     {
         enemyList = new List<Enemy>();
-
-        // StartCoroutine("SpawnEnemy"); // 자동 시작 방지
     }
 
-    public void StartWave(Wave wave) // 원하는 타이밍에 시작할 수 있도록
+    public void StartWave(Wave wave)
     {
         currentWave = wave;
 
@@ -55,7 +45,7 @@ public class EnemySpawner : MonoBehaviour
 
         while (spawnEnemyCount < currentWave.maxEnemyCount)
         {
-            int enemyIndex = Random.Range(0, currentWave.enemyPrefabs.Length); // 랜덤 생성
+            int enemyIndex = Random.Range(0, currentWave.enemyPrefabs.Length);
             GameObject clone = Instantiate(currentWave.enemyPrefabs[enemyIndex]);
             Enemy enemy = clone.GetComponent<Enemy>();
 
@@ -64,7 +54,7 @@ public class EnemySpawner : MonoBehaviour
 
             SpawnEnemyHPSlider(clone);
 
-            spawnEnemyCount ++;
+            spawnEnemyCount++;
 
             yield return new WaitForSeconds(currentWave.spawnTime);
         }
@@ -81,7 +71,7 @@ public class EnemySpawner : MonoBehaviour
 
             playerHP.DecreaseFood(decreaseAmount);
         }
-        else if (type ==EnemyDestroyType.kill)
+        else if (type == EnemyDestroyType.kill)
         {
             playerGold.CurrentGold += dropGold;
         }
@@ -96,11 +86,9 @@ public class EnemySpawner : MonoBehaviour
         GameObject sliderClone = Instantiate(enemyHPSliderPrefab);
 
         sliderClone.transform.SetParent(canvasTransform);
-
         sliderClone.transform.localScale = Vector3.one;
 
         sliderClone.GetComponent<SliderPositionAutoSetter>().Setup(enemy.transform);
-
         sliderClone.GetComponent<EnemyHPViewer>().Setup(enemy.GetComponent<EnemyHP>());
     }
 }

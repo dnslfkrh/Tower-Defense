@@ -15,7 +15,7 @@ public class TowerDataViewer : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textRange;
 
-    private TowerWeapon currentTower;
+    private ITower currentTower; 
 
     private void Awake()
     {
@@ -30,13 +30,33 @@ public class TowerDataViewer : MonoBehaviour
         }
     }
 
-    public void OnPanel(Transform towerWeapon)
+    public void OnPanel(Transform towerTransform)
     {
-        currentTower = towerWeapon.GetComponent<TowerWeapon>();
+        currentTower = towerTransform.GetComponent<ITower>();
+
+        if (currentTower == null)
+        {
+            Debug.LogError("Tower does not implement ITower interface.");
+            return;
+        }
 
         gameObject.SetActive(true);
 
-        UpdateTowerData();
+        UpdateTowerData(currentTower);
+    }
+
+    private void UpdateTowerData(ITower tower)
+    {
+        textDamage.text = "Damage: " + tower.Damage;
+        textRate.text = "Rate: " + tower.Rate;
+        textRange.text = "Range: " + tower.Range;
+
+        if (tower is KitchenTower || tower is MinerTower)
+        {
+            textDamage.text = "No Damage";
+            textRate.text = "No Attack Rate";
+            textRange.text = "No Range";
+        }
     }
 
     public void OffPanel()
@@ -44,16 +64,16 @@ public class TowerDataViewer : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void UpdateTowerData()
-    {
-        textDamage.text = "Damage: " + currentTower.Damage;
-        textRate.text = "Rate: " + currentTower.Rate;
-        textRange.text = "Range: " + currentTower.Range;
-    }
-
     public void OnClickEventTowerSell()
     {
-        currentTower.Sell();
-        OffPanel();
+        if (currentTower != null)
+        {
+            currentTower.Sell();
+            OffPanel();
+        }
+        else
+        {
+            Debug.LogError("currentTower is null. Cannot sell.");
+        }
     }
 }

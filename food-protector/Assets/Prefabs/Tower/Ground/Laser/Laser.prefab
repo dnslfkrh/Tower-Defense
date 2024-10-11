@@ -5005,7 +5005,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8647445782662219920}
   - component: {fileID: 9123332570347947796}
-  - component: {fileID: 5583035173350355844}
+  - component: {fileID: -7217262496458827093}
   - component: {fileID: -2833075048535114802}
   m_Layer: 0
   m_Name: Laser
@@ -5084,7 +5084,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5583035173350355844
+--- !u!114 &-7217262496458827093
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5093,21 +5093,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 6366386327096614795}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6faa3c8c6c97e834eb287e4438274697, type: 3}
+  m_Script: {fileID: 11500000, guid: d09ad7eefcc3dfb4f97cbaf0affcddf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 8977402020519293100}
-  weaponType: 1
-  attackRate: 0.5
-  attackRange: 2
-  projectilePrefab: {fileID: 0}
-  attackDamage: 1
-  sellPrice: 25
   lineRenderer: {fileID: 1675353189217728917}
   hitEffect: {fileID: 2975820908298067873}
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
+  attackRate: 0.5
+  attackRange: 2
+  attackDamage: 1
+  sellPrice: 25
 --- !u!65 &-2833075048535114802
 BoxCollider:
   m_ObjectHideFlags: 0
