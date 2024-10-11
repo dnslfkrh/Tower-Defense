@@ -54,7 +54,6 @@ public class KitchenTower : MonoBehaviour, ITower
         if (playerGold != null)
         {
             playerGold.CurrentGold += sellPrice;
-            Debug.Log("Kitchen 타워 판매 완료, 골드: " + playerGold.CurrentGold);
         }
 
         Destroy(gameObject);
