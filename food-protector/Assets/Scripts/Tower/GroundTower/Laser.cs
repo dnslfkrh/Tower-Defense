@@ -42,7 +42,6 @@ public class Laser : MonoBehaviour, ITower
             {
                 RotateToTarget();
                 EnableLaser();
-                SpawnLaser();
             }
             else
             {
@@ -55,10 +54,18 @@ public class Laser : MonoBehaviour, ITower
 
     private void Update()
     {
-        if (attackTarget != null && !IsPossibleToAttackTarget())
+        if (attackTarget != null)
         {
-            attackTarget = null;
-            DisableLaser();
+            if (IsPossibleToAttackTarget())
+            {
+                RotateToTarget();
+                UpdateLaser();
+            }
+            else
+            {
+                attackTarget = null;
+                DisableLaser();
+            }
         }
     }
 
@@ -92,7 +99,7 @@ public class Laser : MonoBehaviour, ITower
         return closestTarget;
     }
 
-    private void SpawnLaser()
+    private void UpdateLaser()
     {
         if (attackTarget == null)
         {
@@ -101,25 +108,18 @@ public class Laser : MonoBehaviour, ITower
         }
 
         Vector3 direction = attackTarget.position - transform.position;
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, attackRange, targetLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, attackRange, targetLayer);
 
-        bool hitTarget = false;
-        foreach (var hitInfo in hits)
+        if (hit.collider != null && hit.transform == attackTarget)
         {
-            if (hitInfo.transform == attackTarget)
-            {
-                lineRenderer.SetPosition(0, spawnPoint.position);
-                lineRenderer.SetPosition(1, hitInfo.point);
-                hitEffect.position = hitInfo.point;
-                hitEffect.gameObject.SetActive(true);
+            lineRenderer.SetPosition(0, spawnPoint.position);
+            lineRenderer.SetPosition(1, hit.point);
+            hitEffect.position = hit.point;
+            hitEffect.gameObject.SetActive(true);
 
-                attackTarget.GetComponent<EnemyHP>().TakeDamage(attackDamage * Time.deltaTime);
-                hitTarget = true;
-                break;
-            }
+            attackTarget.GetComponent<EnemyHP>().TakeDamage(attackDamage * Time.deltaTime);
         }
-
-        if (!hitTarget)
+        else
         {
             DisableLaser();
         }
