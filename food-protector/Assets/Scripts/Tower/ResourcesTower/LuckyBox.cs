@@ -1,14 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-public class KitchenTower : MonoBehaviour, ITower
+public class LuckyBox : MonoBehaviour, ITower
 {
     public float Damage => 0;
     public float Rate => 0;
     public float Range => 0;
 
-    private int sellPrice = 15;
-
+    private int sellPrice = 250;
     private PlayerHP playerHP;
 
     private void Start()
@@ -17,26 +16,25 @@ public class KitchenTower : MonoBehaviour, ITower
 
         if (playerHP != null)
         {
-            StartCoroutine(GetFood());
+            StartCoroutine(GainHealth());
         }
     }
 
-    private IEnumerator GetFood()
+    private IEnumerator GainHealth()
     {
         while (true)
         {
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(3f);
 
-            if (Random.value <= 0.5f)
+            if (Random.value <= 0.01f)
             {
-                playerHP.IncreaseFood(5f);
+                playerHP.IncreaseFood(500f);
             }
         }
     }
 
     public void Setup(EnemySpawner enemySpawner, PlayerGold playerGold, Tile ownerTile)
     {
-
     }
 
     public void Sell()

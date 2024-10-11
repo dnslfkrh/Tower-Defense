@@ -19,6 +19,7 @@ public class TowerCostManager : MonoBehaviour
         towerCostDictionary.Add("Shotgun", 70);
         towerCostDictionary.Add("Bow", 80);
         towerCostDictionary.Add("SlowTower", 150);
+        towerCostDictionary.Add("LuckyBox", 500);
     }
 
     public int GetTowerCost(string towerType)
