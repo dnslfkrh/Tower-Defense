@@ -29,6 +29,7 @@ public class TowerSpawner : MonoBehaviour
         { "Laser", 1 },
         { "Miner", 2 },
         { "Kitchen", 3 },
+        { "Shotgun", 4 },
     };
 
     public void ReadyToSpawnTower(string type)
@@ -83,7 +84,6 @@ public class TowerSpawner : MonoBehaviour
 
             GameObject clone = Instantiate(towerPrefab[towerIndex], position, Quaternion.identity);
 
-            // Miner는 TowerWeapon이 필요 없음
             if (towerType == "Miner" || towerType == "Kitchen")
             {
                 return;
@@ -95,7 +95,6 @@ public class TowerSpawner : MonoBehaviour
             {
                 return;
             }
-// 적 스폰 여부와 관계없이 타워 세팅
             
             tower.Setup(enemySpawner, playerGold, tile);
         }
