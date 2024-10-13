@@ -79,7 +79,7 @@ public class Archer : MonoBehaviour, ITower
             if (enemy == null) continue;
 
             float distanceSqr = (enemy.transform.position - transform.position).sqrMagnitude;
-            if (enemy.CompareTag("Ground") && distanceSqr <= attackRange * attackRange && distanceSqr < closestDistSqr)
+            if (enemy.CompareTag("Air") && distanceSqr <= attackRange * attackRange && distanceSqr < closestDistSqr)
             {
                 closestDistSqr = distanceSqr;
                 closestTarget = enemy.transform;
