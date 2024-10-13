@@ -19,8 +19,10 @@ public class BombTower : MonoBehaviour, ITower
     [SerializeField]
     private int sellPrice = 50;
 
+    private EnemySpawner enemySpawner;
     private PlayerGold playerGold;
     private float attackCooldown = 0f;
+    private Tile ownerTile;
 
     public float Damage => 0;
     public float Rate => rate;
@@ -75,14 +77,15 @@ public class BombTower : MonoBehaviour, ITower
 
     public void Sell()
     {
-        if (playerGold != null)
-        {
-            playerGold.CurrentGold += sellPrice;
-        }
+        playerGold.CurrentGold += sellPrice;
+        ownerTile.IsBuildTower = false;
         Destroy(gameObject);
     }
 
     public void Setup(EnemySpawner enemySpawner, PlayerGold playerGold, Tile ownerTile)
     {
+        this.enemySpawner = enemySpawner;
+        this.playerGold = playerGold;
+        this.ownerTile = ownerTile;
     }
 }

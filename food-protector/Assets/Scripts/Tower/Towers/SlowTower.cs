@@ -3,15 +3,21 @@ using UnityEngine;
 
 public class SlowTower : MonoBehaviour, ITower
 {
-    [SerializeField] private float slowRange = 3.0f;
-    [SerializeField] private int sellPrice = 75;
+    [SerializeField]
+    private float slowRange = 3.0f;
+    
+    [SerializeField]
+    private int sellPrice = 75;
+    
     private List<Movement2D> slowedEnemies = new List<Movement2D>();
     private PlayerGold playerGold;
+    private EnemySpawner enemySpawner;
+    private Tile ownerTile;
 
     public float Damage => 0;
     public float Rate => 0; 
-    public float Range => slowRange; 
-
+    public float Range => slowRange;
+    
     private void Start()
     {
         playerGold = FindObjectOfType<PlayerGold>();
@@ -57,15 +63,14 @@ public class SlowTower : MonoBehaviour, ITower
 
     public void Sell()
     {
-        PlayerGold playerGold = FindObjectOfType<PlayerGold>();
-        if (playerGold != null)
-        {
-            playerGold.CurrentGold += sellPrice;
-        }
-
+        playerGold.CurrentGold += sellPrice;
+        ownerTile.IsBuildTower = false;
         Destroy(gameObject);
     }
     public void Setup(EnemySpawner enemySpawner, PlayerGold playerGold, Tile ownerTile)
     {
+        this.enemySpawner = enemySpawner;
+        this.playerGold = playerGold;
+        this.ownerTile = ownerTile;
     }
 }

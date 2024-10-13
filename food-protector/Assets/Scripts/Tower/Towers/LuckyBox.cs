@@ -9,6 +9,9 @@ public class LuckyBox : MonoBehaviour, ITower
 
     private int sellPrice = 250;
     private PlayerHP playerHP;
+    private EnemySpawner enemySpawner;
+    private PlayerGold playerGold;
+    private Tile ownerTile;
 
     private void Start()
     {
@@ -35,16 +38,15 @@ public class LuckyBox : MonoBehaviour, ITower
 
     public void Setup(EnemySpawner enemySpawner, PlayerGold playerGold, Tile ownerTile)
     {
+        this.enemySpawner = enemySpawner;
+        this.playerGold = playerGold;
+        this.ownerTile = ownerTile;
     }
 
     public void Sell()
     {
-        PlayerGold playerGold = FindObjectOfType<PlayerGold>();
-        if (playerGold != null)
-        {
-            playerGold.CurrentGold += sellPrice;
-        }
-
+        playerGold.CurrentGold += sellPrice;
+        ownerTile.IsBuildTower = false;
         Destroy(gameObject);
     }
 }
