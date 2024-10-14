@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7594429566333249000}
   - component: {fileID: 4002935167254191733}
   - component: {fileID: 2509458654753411522}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crow
   m_TagString: Air
   m_Icon: {fileID: 0}
@@ -161,5 +161,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f5eed36a7d6264481528f743d3c3de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  moveDirectiron: {x: 0, y: 0, z: 0}
+  baseMoveSpeed: 0

@@ -35,6 +35,7 @@ public class TowerSpawner : MonoBehaviour
         { "LuckyBox", 7 },
         { "BombTower", 8 },
         { "GasTower", 9 },
+        { "FireworkTower", 10 },
     };
 
     public void ReadyToSpawnTower(string type)

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5687171060297784713}
   - component: {fileID: 6554507184414399755}
   - component: {fileID: 5286697044567928933}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cow
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -126,8 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f5eed36a7d6264481528f743d3c3de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  moveDirectiron: {x: 0, y: 0, z: 0}
+  baseMoveSpeed: 0
 --- !u!58 &5286697044567928933
 CircleCollider2D:
   m_ObjectHideFlags: 0
