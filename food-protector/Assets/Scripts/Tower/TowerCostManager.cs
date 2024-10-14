@@ -23,6 +23,7 @@ public class TowerCostManager : MonoBehaviour
         towerCostDictionary.Add("BombTower", 100);
         towerCostDictionary.Add("GasTower", 160);
         towerCostDictionary.Add("FireworkTower", 180);
+        towerCostDictionary.Add("StopTower", 200);
     }
 
     public int GetTowerCost(string towerType)

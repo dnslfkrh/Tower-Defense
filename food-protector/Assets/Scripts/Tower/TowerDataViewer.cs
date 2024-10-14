@@ -51,7 +51,7 @@ public class TowerDataViewer : MonoBehaviour
         textRate.text = "Rate: " + tower.Rate;
         textRange.text = "Range: " + tower.Range;
 
-        if (tower is KitchenTower || tower is MinerTower || tower is LuckyBox)
+        if (tower is KitchenTower || tower is MinerTower || tower is LuckyBox || tower is StopTower || tower is SlowTower)
         {
             textDamage.text = "No Damage";
             textRate.text = "No Attack Rate";
