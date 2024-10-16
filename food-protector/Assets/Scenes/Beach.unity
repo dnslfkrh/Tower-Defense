@@ -713,7 +713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6558860d8d1d2c40ba99c4116e9f2c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenImage: {fileID: 0}
+  screenImage: {fileID: 1765411612}
   maxFood: 100
 --- !u!4 &129821495
 Transform:
@@ -6420,9 +6420,9 @@ MonoBehaviour:
   - spawnTime: 3
     maxEnemyCount: 15
     enemyPrefabs:
+    - {fileID: 4710109676924590532, guid: 8f756f2f21e33204386b50703de7bf10, type: 3}
     - {fileID: 7902645394040942344, guid: fef99d56a4b4b644ebdb436fc2194c00, type: 3}
     - {fileID: 3224266672577625820, guid: e809d4e960c048343aa7109be90e8ed2, type: 3}
-    - {fileID: 4710109676924590532, guid: 8f756f2f21e33204386b50703de7bf10, type: 3}
   - spawnTime: 3
     maxEnemyCount: 35
     enemyPrefabs:

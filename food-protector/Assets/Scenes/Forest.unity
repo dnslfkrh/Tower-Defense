@@ -4539,7 +4539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6558860d8d1d2c40ba99c4116e9f2c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenImage: {fileID: 0}
+  screenImage: {fileID: 1743175641}
   maxFood: 100
 --- !u!4 &1264495774
 Transform:
