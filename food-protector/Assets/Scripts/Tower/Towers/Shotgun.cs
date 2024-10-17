@@ -3,26 +3,38 @@ using UnityEngine;
 
 public class Shotgun : MonoBehaviour, ITower
 {
-    public float Damage => attackDamage;
-    public float Rate => attackRate;
-    public float Range => attackRange;
+    [SerializeField]
+    private Transform spawnPoint;
+    
+    [SerializeField]
+    private GameObject projectilePrefab;
+    
+    [SerializeField]
+    private float attackRate = 1.5f; 
+    
+    [SerializeField]
+    private float attackRange = 2.5f;
+    
+    [SerializeField]
+    private int attackDamage = 3;
+    
+    [SerializeField]
+    private int sellPrice = 35;
+    
+    [SerializeField]
+    private float targetPersistenceTime = 0.5f;
 
-    [Header("Shotgun")]
-    [SerializeField] private Transform spawnPoint;
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private float attackRate = 1.5f; 
-    [SerializeField] private float attackRange = 2.5f;
-    [SerializeField] private int attackDamage = 3;
-    [SerializeField] private int sellPrice = 35;
-    [SerializeField] private float targetPersistenceTime = 0.5f;
-
+    private float targetAcquiredTime;
+    private bool isShooting = false;
     private Transform attackTarget = null;
     private EnemySpawner enemySpawner;
     private PlayerGold playerGold;
     private Tile ownerTile;
-    private float targetAcquiredTime;
     private Coroutine attackCoroutine;
-    private bool isShooting = false;
+
+    public float Damage => attackDamage;
+    public float Rate => attackRate;
+    public float Range => attackRange;
 
     public void Setup(EnemySpawner enemySpawner, PlayerGold playerGold, Tile ownerTile)
     {

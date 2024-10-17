@@ -3,25 +3,39 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour, ITower
 {
-    public float Damage => attackDamage;
-    public float Rate => attackRate;
-    public float Range => attackRange;
-
-    [Header("Laser")]
-    [SerializeField] private Transform spawnPoint;
-    [SerializeField] private LineRenderer lineRenderer;
-    [SerializeField] private Transform hitEffect;
-    [SerializeField] private LayerMask targetLayer;
-    [SerializeField] private float attackRate = 0.5f;
-    [SerializeField] private float attackRange = 5.0f;
-    [SerializeField] private int attackDamage = 2;
-    [SerializeField] private int sellPrice = 25;
+    [SerializeField]
+    private Transform spawnPoint;
+    
+    [SerializeField]
+    private LineRenderer lineRenderer;
+    
+    [SerializeField]
+    private Transform hitEffect;
+    
+    [SerializeField]
+    private LayerMask targetLayer;
+    
+    [SerializeField]
+    private float attackRate = 0.5f;
+    
+    [SerializeField]
+    private float attackRange = 5.0f;
+    
+    [SerializeField]
+    private int attackDamage = 2;
+    
+    [SerializeField]
+    private int sellPrice = 25;
 
     private Transform attackTarget = null;
     private EnemySpawner enemySpawner;
     private PlayerGold playerGold;
     private Tile ownerTile;
     private Coroutine attackCoroutine;
+
+    public float Damage => attackDamage;
+    public float Rate => attackRate;
+    public float Range => attackRange;
 
     public void Setup(EnemySpawner enemySpawner, PlayerGold playerGold, Tile ownerTile)
     {

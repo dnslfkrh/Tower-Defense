@@ -13,7 +13,6 @@ public class WaveSystem : MonoBehaviour
     private int currentWaveIndex = -1;
 
     public int CurrentWave => currentWaveIndex + 1;
-
     public int MaxWave => waves.Length;
 
     public void StartWave()

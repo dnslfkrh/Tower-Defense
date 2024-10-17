@@ -19,9 +19,9 @@ public class BombTower : MonoBehaviour, ITower
     [SerializeField]
     private int sellPrice = 50;
 
+    private float attackCooldown = 0f;
     private EnemySpawner enemySpawner;
     private PlayerGold playerGold;
-    private float attackCooldown = 0f;
     private Tile ownerTile;
 
     public float Damage => 0;

@@ -3,25 +3,37 @@ using UnityEngine;
 
 public class Catapult : MonoBehaviour, ITower
 {
-    public float Damage => attackDamage;
-    public float Rate => attackRate;
-    public float Range => attackRange;
+    [SerializeField]
+    private Transform spawnPoint;
+    
+    [SerializeField]
+    private GameObject projectilePrefab;
+    
+    [SerializeField]
+    private float attackRate = 1.0f;
+    
+    [SerializeField]
+    private float attackRange = 2.5f;
+    
+    [SerializeField]
+    private int attackDamage = 5;
+    
+    [SerializeField]
+    private int sellPrice = 25;
+    
+    [SerializeField]
+    private float targetPersistenceTime = 0.5f;
 
-    [Header("Catapult")]
-    [SerializeField] private Transform spawnPoint;
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private float attackRate = 1.0f;
-    [SerializeField] private float attackRange = 2.5f;
-    [SerializeField] private int attackDamage = 5;
-    [SerializeField] private int sellPrice = 25;
-    [SerializeField] private float targetPersistenceTime = 0.5f;
-
+    private float targetAcquiredTime;
     private Transform attackTarget = null;
     private EnemySpawner enemySpawner;
     private PlayerGold playerGold;
     private Tile ownerTile;
-    private float targetAcquiredTime;
     private Coroutine attackCoroutine;
+
+    public float Damage => attackDamage;
+    public float Rate => attackRate;
+    public float Range => attackRange;
 
     public void Setup(EnemySpawner enemySpawner, PlayerGold playerGold, Tile ownerTile)
     {

@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private TowerMovement2D movement2D;
-
-    private Transform target;
-
     private int damage;
+    private TowerMovement2D movement2D;
+    private Transform target;
 
     public void Setup(Transform target, int damage)
     {

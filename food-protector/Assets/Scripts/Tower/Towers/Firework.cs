@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Firework : MonoBehaviour
 {
-    private Transform target;
     private float damage;
     public float explosionRadius = 2.0f;
     public float explosionDamage = 15.0f;
+    private Transform target;
     public LayerMask enemyLayer;
 
     public void Setup(Transform target, float damage)

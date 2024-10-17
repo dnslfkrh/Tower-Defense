@@ -15,11 +15,11 @@ public class StopTower : MonoBehaviour, ITower
     [SerializeField]
     private int sellPrice = 100;
 
+    private float stopTimer = 0f;
     private List<Movement2D> stoppedEnemies = new List<Movement2D>();
     private PlayerGold playerGold;
     private EnemySpawner enemySpawner;
     private Tile ownerTile;
-    private float stopTimer = 0f;
 
     public float Damage => 0;
     public float Rate => 0;

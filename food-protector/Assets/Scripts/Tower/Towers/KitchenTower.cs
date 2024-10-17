@@ -3,13 +3,12 @@ using UnityEngine;
 
 public class KitchenTower : MonoBehaviour, ITower
 {
+    private int sellPrice = 100;
+    private PlayerHP playerHP;
+
     public float Damage => 0;
     public float Rate => 0;
     public float Range => 0;
-
-    private int sellPrice = 15;
-
-    private PlayerHP playerHP;
 
     private void Start()
     {

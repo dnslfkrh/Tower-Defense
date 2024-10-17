@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class LuckyBox : MonoBehaviour, ITower
 {
-    public float Damage => 0;
-    public float Rate => 0;
-    public float Range => 0;
-
     private int sellPrice = 250;
     private PlayerHP playerHP;
     private EnemySpawner enemySpawner;
     private PlayerGold playerGold;
     private Tile ownerTile;
+
+    public float Damage => 0;
+    public float Rate => 0;
+    public float Range => 0;
 
     private void Start()
     {

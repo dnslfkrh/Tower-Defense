@@ -8,20 +8,13 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float rotationSpeed = 10f;
     
-    private int wayPointCount;
-
-    private Transform[] wayPoints;
-    
+    private int waypointCount;
     private int currentIndex = 0;
-
     private string enemyType;
-
     private float dropGold;
-
+    private Transform[] wayPoints;
     private Movement2D movement2D;
-    
     private EnemySpawner enemySpawner;
-
     private EnemyStatsManager enemyStatsManager;
 
     private void Start()
@@ -41,8 +34,8 @@ public class Enemy : MonoBehaviour
 
         this.enemySpawner = enemySpawner;
 
-        wayPointCount = wayPoints.Length;
-        this.wayPoints = new Transform[wayPointCount];
+        waypointCount = wayPoints.Length;
+        this.wayPoints = new Transform[waypointCount];
         this.wayPoints = wayPoints;
 
         // 첫 번째 wayPoint로 이동
@@ -85,7 +78,7 @@ public class Enemy : MonoBehaviour
     private void NextMoveTo()
     {
         // 아직 도달해야 할 waypoint가 남아 있으면
-        if (currentIndex < wayPointCount - 1)
+        if (currentIndex < waypointCount - 1)
         {
 
             transform.position = wayPoints[currentIndex].position;

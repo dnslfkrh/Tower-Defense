@@ -3,13 +3,12 @@ using UnityEngine;
 
 public class MinerTower : MonoBehaviour, ITower
 {
+    private int sellPrice = 100;
+    private PlayerGold playerGold;
+
     public float Damage => 0;
     public float Rate => 0;
     public float Range => 0;
-
-    private int sellPrice = 15;
-
-    private PlayerGold playerGold;
 
     private void Start()
     {
@@ -53,7 +52,6 @@ public class MinerTower : MonoBehaviour, ITower
         if (playerGold != null)
         {
             playerGold.CurrentGold += sellPrice;
-            Debug.Log("Micer 타워 판매 완료, 골드: " + playerGold.CurrentGold);
         }
 
         Destroy(gameObject);

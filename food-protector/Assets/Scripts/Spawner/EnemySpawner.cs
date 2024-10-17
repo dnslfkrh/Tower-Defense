@@ -11,23 +11,23 @@ public class EnemySpawner : MonoBehaviour
     private Transform canvasTransform;
 
     [SerializeField]
-    private Transform[] wayPoints;
+    private Transform[] waypoints;
 
     [SerializeField]
     private PlayerHP playerHP;
-
-    private List<Enemy> enemyList;
-    private Wave currentWave;
 
     [SerializeField]
     private EnemyStatsManager enemyStatsManager;
 
     [SerializeField]
     private PlayerGold playerGold;
-
+    
     private bool isWaveActive = false;
-    public bool IsWaveActive => isWaveActive;
+    private List<Enemy> enemyList;
+    private Wave currentWave;
+
     public List<Enemy> EnemyList => enemyList;
+    public bool IsWaveActive => isWaveActive;
 
     private void Awake()
     {
@@ -51,7 +51,7 @@ public class EnemySpawner : MonoBehaviour
             GameObject clone = Instantiate(currentWave.enemyPrefabs[enemyIndex]);
             Enemy enemy = clone.GetComponent<Enemy>();
 
-            enemy.Setup(this, wayPoints);
+            enemy.Setup(this, waypoints);
             enemyList.Add(enemy);
 
             SpawnEnemyHPSlider(clone);
