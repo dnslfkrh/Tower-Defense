@@ -1044,22 +1044,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - spawnTime: 3
-    maxEnemyCount: 15
+  - spawnTime: 2
+    maxEnemyCount: 10
     enemyPrefabs:
     - {fileID: 4982446662823298235, guid: 9fc1cf923843e5e44bebeab3fd05087a, type: 3}
     - {fileID: 8222606839874832248, guid: 46b6262968c17e143925f7a552236681, type: 3}
     - {fileID: 1705248425200858547, guid: 2d18f8bf6b32d234589255fc813d4fb4, type: 3}
     - {fileID: 4120252299818053231, guid: f766301b53a0e9d48a29a2fa5fc5e6c9, type: 3}
-  - spawnTime: 3
-    maxEnemyCount: 20
+  - spawnTime: 2
+    maxEnemyCount: 10
     enemyPrefabs:
     - {fileID: 8222606839874832248, guid: 46b6262968c17e143925f7a552236681, type: 3}
     - {fileID: 1705248425200858547, guid: 2d18f8bf6b32d234589255fc813d4fb4, type: 3}
     - {fileID: 4120252299818053231, guid: f766301b53a0e9d48a29a2fa5fc5e6c9, type: 3}
     - {fileID: 4982446662823298235, guid: 9fc1cf923843e5e44bebeab3fd05087a, type: 3}
-  - spawnTime: 3
-    maxEnemyCount: 25
+  - spawnTime: 2
+    maxEnemyCount: 5
     enemyPrefabs:
     - {fileID: 8222606839874832248, guid: 46b6262968c17e143925f7a552236681, type: 3}
     - {fileID: 4120252299818053231, guid: f766301b53a0e9d48a29a2fa5fc5e6c9, type: 3}
@@ -4540,7 +4540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenImage: {fileID: 1743175641}
-  maxFood: 100
+  maxFood: 50
 --- !u!4 &1264495774
 Transform:
   m_ObjectHideFlags: 0
