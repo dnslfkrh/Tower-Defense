@@ -6943,7 +6943,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHPSliderPrefab: {fileID: 79055216642851859, guid: 8ea1f07bdd21cd042b278c8b0d9c4598, type: 3}
   canvasTransform: {fileID: 163558486}
-  wayPoints:
+  waypoints:
   - {fileID: 1803258386}
   - {fileID: 137912452}
   - {fileID: 129808641}

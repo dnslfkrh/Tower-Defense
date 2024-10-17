@@ -1080,7 +1080,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHPSliderPrefab: {fileID: 79055216642851859, guid: 8ea1f07bdd21cd042b278c8b0d9c4598, type: 3}
   canvasTransform: {fileID: 599121021}
-  wayPoints:
+  waypoints:
   - {fileID: 1180171483}
   - {fileID: 891435842}
   - {fileID: 1269664633}
