@@ -17,6 +17,7 @@ public class EnemySpawner : MonoBehaviour
     private PlayerHP playerHP;
 
     private List<Enemy> enemyList;
+    private Wave currentWave;
 
     [SerializeField]
     private EnemyStatsManager enemyStatsManager;
@@ -24,7 +25,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private PlayerGold playerGold;
 
-    private Wave currentWave;
+    private bool isWaveActive = false;
+    public bool IsWaveActive => isWaveActive;
     public List<Enemy> EnemyList => enemyList;
 
     private void Awake()
@@ -35,8 +37,8 @@ public class EnemySpawner : MonoBehaviour
     public void StartWave(Wave wave)
     {
         currentWave = wave;
-
-        StartCoroutine("SpawnEnemy");
+        isWaveActive = true; // 웨이브 시작 시 활성화
+        StartCoroutine(SpawnEnemy());
     }
 
     private IEnumerator SpawnEnemy()
@@ -55,9 +57,11 @@ public class EnemySpawner : MonoBehaviour
             SpawnEnemyHPSlider(clone);
 
             spawnEnemyCount++;
-
             yield return new WaitForSeconds(currentWave.spawnTime);
         }
+
+        // 웨이브가 완료되면 활성 상태를 false로 설정
+        isWaveActive = false;
     }
 
     public void DestroyEnemy(EnemyDestroyType type, Enemy enemy, float dropGold)
@@ -66,9 +70,7 @@ public class EnemySpawner : MonoBehaviour
         if (type == EnemyDestroyType.Arrive)
         {
             EnemyHP enemyHP = enemy.GetComponent<EnemyHP>();
-
             float decreaseAmount = enemyStatsManager.GetDecreaseFood(enemyHP.enemyType);
-
             playerHP.DecreaseFood(decreaseAmount);
         }
         else if (type == EnemyDestroyType.kill)
@@ -77,14 +79,12 @@ public class EnemySpawner : MonoBehaviour
         }
 
         enemyList.Remove(enemy);
-
         Destroy(enemy.gameObject);
     }
 
     private void SpawnEnemyHPSlider(GameObject enemy)
     {
         GameObject sliderClone = Instantiate(enemyHPSliderPrefab);
-
         sliderClone.transform.SetParent(canvasTransform);
         sliderClone.transform.localScale = Vector3.one;
 

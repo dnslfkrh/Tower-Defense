@@ -30,7 +30,7 @@ public class PlayerHP : MonoBehaviour
 
         if (currentFood <= 0)
         {
-            // 게임 종료
+            GameManager.Instance.GameOver();
         }
     }
 

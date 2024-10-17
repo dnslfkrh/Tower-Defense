@@ -38,7 +38,6 @@ public class EnemyHP : MonoBehaviour
             return;
         }
 
-        Debug.Log("¾ÆÇÁ´Ù");
         currentHP -= damage;
 
         StopCoroutine("HitAlphaAnimation");
