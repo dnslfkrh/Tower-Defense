@@ -5,25 +5,25 @@ public class Laser : MonoBehaviour, ITower
 {
     [SerializeField]
     private Transform spawnPoint;
-    
+
     [SerializeField]
     private LineRenderer lineRenderer;
-    
+
     [SerializeField]
     private Transform hitEffect;
-    
+
     [SerializeField]
     private LayerMask targetLayer;
-    
+
     [SerializeField]
     private float attackRate = 0.5f;
-    
+
     [SerializeField]
     private float attackRange = 5.0f;
-    
+
     [SerializeField]
     private int attackDamage = 2;
-    
+
     [SerializeField]
     private int sellPrice = 25;
 
