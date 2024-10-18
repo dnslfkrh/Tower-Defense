@@ -102,7 +102,7 @@ public class TowerSpawner : MonoBehaviour
             {
                 return;
             }
-            
+
             tower.Setup(enemySpawner, playerGold, tile);
         }
         else

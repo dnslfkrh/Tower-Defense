@@ -5,22 +5,22 @@ public class Archer : MonoBehaviour, ITower
 {
     [SerializeField]
     private Transform spawnPoint;
-    
+
     [SerializeField]
     private GameObject arrowPrefab;
-    
+
     [SerializeField]
     private float attackRate = 0.5f;
-    
+
     [SerializeField]
-    private float attackRange = 5.0f; 
-    
+    private float attackRange = 5.0f;
+
     [SerializeField]
-    private int attackDamage = 2;  
-    
+    private int attackDamage = 2;
+
     [SerializeField]
     private int sellPrice = 20;
-    
+
     [SerializeField]
     private float targetPersistenceTime = 0.5f;
 

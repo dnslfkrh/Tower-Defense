@@ -5,8 +5,8 @@ public class Movement2D : MonoBehaviour
     [SerializeField]
     private float baseMoveSpeed;
 
-    private Vector3 moveDirection = Vector3.zero;
     private float currentSpeedMultiplier = 1.0f;
+    private Vector3 moveDirection = Vector3.zero;
 
     public float MoveSpeed => baseMoveSpeed * currentSpeedMultiplier;
 

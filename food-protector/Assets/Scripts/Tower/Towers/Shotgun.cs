@@ -143,7 +143,6 @@ public class Shotgun : MonoBehaviour, ITower
 
         if (!targetExists)
         {
-            Debug.Log($"Target {attackTarget.name} no longer exists in EnemyList.");
             return false;
         }
 

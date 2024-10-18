@@ -31,7 +31,6 @@ public class Firework : MonoBehaviour
         }
         else
         {
-            Debug.Log("Å¸°ÙÀÌ ¾ø³×");
             Destroy(gameObject);
         }
     }
@@ -54,8 +53,6 @@ public class Firework : MonoBehaviour
 
     private void Explode()
     {
-        Debug.Log("ÆøÁ× Æø¹ß!");
-
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, explosionRadius, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
         {

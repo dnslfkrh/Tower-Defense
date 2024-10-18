@@ -52,7 +52,7 @@ public class StopTower : MonoBehaviour, ITower
                 Movement2D enemyMovement = collider.GetComponent<Movement2D>();
                 if (enemyMovement != null && !stoppedEnemies.Contains(enemyMovement))
                 {
-                    enemyMovement.SetSpeedMultiplier(0);  // 적의 속도를 0으로 설정
+                    enemyMovement.SetSpeedMultiplier(0);
                     stoppedEnemies.Add(enemyMovement);
                     StartCoroutine(ResumeEnemyMovementAfterDelay(enemyMovement, stopDuration));
                 }
@@ -65,7 +65,7 @@ public class StopTower : MonoBehaviour, ITower
         yield return new WaitForSeconds(delay);
         if (enemyMovement != null)
         {
-            enemyMovement.SetSpeedMultiplier(1.0f);  // 적의 속도를 원래대로 복구
+            enemyMovement.SetSpeedMultiplier(1.0f);
             stoppedEnemies.Remove(enemyMovement);
         }
     }

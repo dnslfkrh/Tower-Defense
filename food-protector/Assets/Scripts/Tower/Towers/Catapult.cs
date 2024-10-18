@@ -5,22 +5,22 @@ public class Catapult : MonoBehaviour, ITower
 {
     [SerializeField]
     private Transform spawnPoint;
-    
+
     [SerializeField]
     private GameObject projectilePrefab;
-    
+
     [SerializeField]
     private float attackRate = 1.0f;
-    
+
     [SerializeField]
     private float attackRange = 2.5f;
-    
+
     [SerializeField]
     private int attackDamage = 5;
-    
+
     [SerializeField]
     private int sellPrice = 25;
-    
+
     [SerializeField]
     private float targetPersistenceTime = 0.5f;
 
@@ -133,7 +133,6 @@ public class Catapult : MonoBehaviour, ITower
 
         if (!targetExists)
         {
-            Debug.Log($"Target {attackTarget.name} no longer exists in EnemyList.");
             return false;
         }
 

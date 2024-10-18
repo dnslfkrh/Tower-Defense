@@ -34,7 +34,7 @@ public class TMPAlpha : MonoBehaviour
             color.a = Mathf.Lerp(start, end, percent);
             text.color = color;
 
-            yield return null;  
+            yield return null;
         }
     }
 }

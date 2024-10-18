@@ -31,7 +31,6 @@ public class Bomb : MonoBehaviour
         }
         else
         {
-            Debug.Log("Å¸°ÙÀÌ ¾ø³×");
             Destroy(gameObject);
         }
     }
@@ -49,19 +48,17 @@ public class Bomb : MonoBehaviour
         }
 
         collision.GetComponent<EnemyHP>().TakeDamage(damage);
-        StartCoroutine(DelayedExplode()); 
+        StartCoroutine(DelayedExplode());
     }
 
     private IEnumerator DelayedExplode()
     {
         yield return new WaitForSeconds(2f);
-        Explode(); 
+        Explode();
     }
 
     private void Explode()
     {
-        Debug.Log("Æã~~~");
-
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, explosionRadius, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
         {

@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class BombTower : MonoBehaviour, ITower
 {
-    [SerializeField] 
+    [SerializeField]
     private float range = 5.0f;
-    
+
     [SerializeField]
     private float rate = 0.2f;
 
     [SerializeField]
     private GameObject bombPrefab;
-    
+
     [SerializeField]
     private Transform firePoint;
-    
+
     [SerializeField]
     private int sellPrice = 50;
 
@@ -48,11 +48,6 @@ public class BombTower : MonoBehaviour, ITower
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, range);
 
-        if (hitEnemies.Length == 0)
-        {
-            Debug.Log("범위 안에 적이 없습니다.");
-        }
-
         foreach (Collider2D enemy in hitEnemies)
         {
             if (enemy.CompareTag("Ground"))
@@ -63,7 +58,6 @@ public class BombTower : MonoBehaviour, ITower
                 Bomb bombScript = newBomb.GetComponent<Bomb>();
                 bombScript.Setup(enemy.transform, bombScript.explosionDamage);
 
-                Debug.Log("폭탄 발사");
                 break;
             }
         }

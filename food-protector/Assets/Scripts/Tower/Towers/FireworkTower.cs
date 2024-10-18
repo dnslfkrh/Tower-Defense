@@ -58,7 +58,6 @@ public class FireworkTower : MonoBehaviour, ITower
                 Firework fireworkScript = newFirework.GetComponent<Firework>();
                 fireworkScript.Setup(enemy.transform, fireworkScript.explosionDamage);
 
-                Debug.Log("ÆøÁ× ¹ß»ç");
                 break;
             }
         }

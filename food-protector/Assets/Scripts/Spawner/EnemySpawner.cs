@@ -37,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
     public void StartWave(Wave wave)
     {
         currentWave = wave;
-        isWaveActive = true; // 웨이브 시작 시 활성화
+        isWaveActive = true;
         StartCoroutine(SpawnEnemy());
     }
 
@@ -60,13 +60,11 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(currentWave.spawnTime);
         }
 
-        // 웨이브가 완료되면 활성 상태를 false로 설정
         isWaveActive = false;
     }
 
     public void DestroyEnemy(EnemyDestroyType type, Enemy enemy, float dropGold)
     {
-        // 적이 목표 지점에 도착하면 음식 감소
         if (type == EnemyDestroyType.Arrive)
         {
             EnemyHP enemyHP = enemy.GetComponent<EnemyHP>();
@@ -85,6 +83,7 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnEnemyHPSlider(GameObject enemy)
     {
         GameObject sliderClone = Instantiate(enemyHPSliderPrefab);
+
         sliderClone.transform.SetParent(canvasTransform);
         sliderClone.transform.localScale = Vector3.one;
 
