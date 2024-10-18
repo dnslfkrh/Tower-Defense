@@ -5,6 +5,7 @@ public class MinerTower : MonoBehaviour, ITower
 {
     private int sellPrice = 100;
     private PlayerGold playerGold;
+    private Tile ownerTile;
 
     public float Damage => 0;
     public float Rate => 0;
@@ -43,17 +44,14 @@ public class MinerTower : MonoBehaviour, ITower
     }
     public void Setup(EnemySpawner enemySpawner, PlayerGold playerGold, Tile ownerTile)
     {
-
+        this.playerGold = playerGold;
+        this.ownerTile = ownerTile;
     }
 
     public void Sell()
     {
-        PlayerGold playerGold = FindObjectOfType<PlayerGold>();
-        if (playerGold != null)
-        {
-            playerGold.CurrentGold += sellPrice;
-        }
-
+        playerGold.CurrentGold += sellPrice;
+        ownerTile.IsBuildTower = false;
         Destroy(gameObject);
     }
 }
