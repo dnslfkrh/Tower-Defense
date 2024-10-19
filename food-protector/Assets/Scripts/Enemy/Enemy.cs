@@ -22,7 +22,6 @@ public class Enemy : MonoBehaviour
         enemyStatsManager = FindObjectOfType<EnemyStatsManager>();
         enemyType = GetComponent<EnemyHP>().enemyType;
         dropGold = enemyStatsManager.GetDropGold(enemyType);
-
     }
 
     public void Setup(EnemySpawner enemySpawner, Transform[] wayPoints)
