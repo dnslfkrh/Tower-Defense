@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Bow : MonoBehaviour, ITower
+public class Archer : MonoBehaviour, ITower
 {
     [SerializeField]
     private Transform spawnPoint;
