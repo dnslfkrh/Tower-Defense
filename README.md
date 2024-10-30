@@ -1,8 +1,6 @@
 # Food Protector
 야생 동물을 막아 식량을 지키는 게임
 
-<br>
-
 ### Editor Version
 `2022.3.0f1`
 
